@@ -1,0 +1,42 @@
+	<div class="container" ng-controller="IzmenaCtrl as izmena">
+	  <div class="jumbotron">
+	    <h1>Izmena lozinke</h1> 
+	    	<form name = "changeForm"  
+						ng-submit = "changeForm.$valid && izmena.submitClick()">
+			    <div class="input-group">
+			      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			      <input type="text" class="form-control" placeholder="Korisnicko ime" ng-model="userToChange.username" required>
+			    </div>
+			    
+			    <div class="input-group">
+			      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			      <input type="password" class="form-control" placeholder="Trenutna lozinka" ng-model="userToChange.password" required>
+			    </div>
+			    
+			    <div class="input-group">
+			      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			      <!-- <input type="password" class="form-control" placeholder="Nova lozinka" ng-model="userToChange.password" required> -->
+			      <input name="oldPassword" id="lozinka" type="password" class="form-control"
+				   							 placeholder="Nova lozinka" ng-model="userToChange.newPassword"
+				   							  maxlength="25" required></p>
+			    </div>
+			    
+			    <div class="input-group">
+			      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			      <!-- <input type="password" class="form-control" placeholder="Potvrda nove lozinke" ng-model="userToChange.password" required> -->
+			      <input ng-model="lozinka1" class="form-control" placeholder="Potvrda nove lozinke"
+			       				name='confirm_password' data-password-verify="userToChange.newPassword" type="password" 
+			       				maxlength="25" required></p>
+				   			
+			    </div>
+			    
+			    <div class="panel panel-danger" ng-show="changeForm.confirm_password.$error.passwordVerify">
+        								
+        						<div class="panel-heading">Potvrda lozinke</div>
+      							<div class="panel-body">Lozinka i ponovljena lozinka se ne poklapaju!</div>
+        		</div>
+			    <button type="submit" class="btn btn-default" >Potvrdi</button>
+			</form>
+	  </div>
+	  
+	</div>

@@ -1,0 +1,33 @@
+<div>
+	<div  class="row">
+
+		<div class="col-xs-8 col-xs-offset-2">
+			<table class="table table-bordered table-hover" ng-show='friendsRequests.hasResult'>
+			  <tr>
+			  	<th>username</th>
+			  	<th>Name</th>
+			  	<th>Lastname</th>
+			  	<th>Accept friedship request</th>
+			  	<th>Decline friendship request</th>
+			  </tr>
+
+			  <tr ng-repeat='relation in friendsRequests.relations' >
+			  	<td> {{relation.destination.username}} <span class="badge" ng-hide='relation.visited'>new</span></td>
+			  	<td> {{relation.destination.name}} </td>
+			  	<td> {{relation.destination.surname}} </td>
+			  	<td> 
+			  		<button type="button" class="btn btn-default button-expanded" ng-click='friendsRequests.answerRequest(relation,true)'> <span class="glyphicon glyphicon-ok"> </span></button> 
+			  	</td>
+			  	<td> 
+			  		<button type="button" class="btn btn-default button-expanded" ng-click='friendsRequests.answerRequest(relation,false)'> <span class="glyphicon glyphicon-remove"> </span></button> 
+			  	</td>
+			  </tr>
+			</table>
+			<!-- requests: {{friendsRequests.hasResult}} -->
+			<div ng-hide='friendsRequests.hasResult'>
+				<h2>	You have no friend requests </h2>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,101 @@
+<!-- Modal -->
+<div class="modal fade  bs-example-modal-xs" id="gradesFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+
+        <h4 class="modal-title" id="giveFeedbackTitle"> Give us your feedback </h4>
+      </div>
+
+
+    <div class="modal-body">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="feedbackRestaurantHeading">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#feedbackRestaurant" aria-expanded="false">
+                General impression:
+                <span uib-rating ng-model="grades.general" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span> 
+              </a>
+            </h4>
+          </div>
+<!-- 
+          <div id="feedbackRestaurant" class="panel-collapse collapse" role="tabpanel" aria-labelledby="feedbackRestaurantHeading">
+            <div class="panel-body">
+              
+                            
+            </div>
+          </div>
+        
+      -->
+        </div>
+
+
+
+        
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFeedbackMeal">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#feedbackMeal" aria-expanded="false"  enable-reset='false' aria-controls="feedbackMeal">
+                Meal:
+                <span uib-rating ng-model="grades.meal" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'"  enable-reset='false' aria-labelledby="custom-icons-1"> 
+              </a>
+            </h4>
+          </div>
+
+          <div id="feedbackMeal" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFeedbackMeal">
+            <div class="panel-body">
+              
+                            <table class="table table-hover">
+                                <tr  ng-repeat='stavka in racun.obrok.stavke'><td>
+                                    {{stavka.proizvod.ime}}
+                                </td></tr>
+                            </table> 
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFeedbackService">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#feedbackService" aria-expanded="false" aria-controls="feedbackService">
+                Service: 
+                <span uib-rating ng-model="grades.service" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" enable-reset='false' aria-labelledby="custom-icons-1">
+              </a>
+            </h4>
+          </div>
+
+          <div id="feedbackService" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFeedbackService">
+            <div class="panel-body">
+              
+                            <table class="table table-hover">
+                                <tr  ng-repeat='konobar in racun.konobari'><td>
+                                     {{konobar.name}}  {{konobar.surname}}
+                                </td></tr>
+                            </table> 
+            </div>
+          </div>
+        </div>
+
+      </div> <!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
+    </div> <!-- content -->
+
+
+      
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" data-dismiss="modal" id="giveFeedbackOk" ng-click='sendFeedback()' 
+              ng-disabled='grades.general<1 || grades.meal<1 || grades.service<1'> Send </button>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal" id="registerInfoCancel">Cancel</button> -->
+      </div>
+      
+    </div>
+  </div>
+</div>

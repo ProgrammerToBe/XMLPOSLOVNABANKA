@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app= "proba">
+<head>
+<meta charset="UTF-8">
+<title>Startup</title>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<script type = "text/javascript" src="js/vendor/angular-sanitize.js"></script>
+<script type = "text/javascript" src="script.js"></script>
+
+</head>
+<body ng-controller="ProbaCtrl as ctrl">
+DOBRODOSLI NA POCETNU STRANU.
+
+
+<button ng-click="ctrl.metoda1()">BUTTON1</button>
+<button ng-click="ctrl.metoda2()">BUTTON2</button>
+
+<input type="text" ng-model = "model1"/><button ng-click="ctrl.funkcija()">Dugme1</button>
+<div>{{model2}}</div>
+
+<input type = "text" ng-model="model2"/>
+
+<button ng-click = "ctrl.getRedirect()">Get</button>
+
+<button ng-click = "ctrl.vidiDaLiPuca()">VidiDaLiPuca</button>
+
+</body>
+</html>

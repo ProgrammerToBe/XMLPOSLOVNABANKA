@@ -1,0 +1,206 @@
+<h3 ng-show='my.reservations.length>0'> My reservations : </h3>
+		<div class="panel panel-default" ng-repeat='rezervacija in my.reservations'>
+          <div class="panel-heading" role="tab" id="headingRezervacija{{rezervacija.id}}">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#Rezervacija{{rezervacija.id}}" aria-expanded="false" aria-controls="Rezervacija{{rezervacija.id}}">
+                {{rezervacija.pocetak | date:'dd.MM.yyyy HH:mm' }} @ {{rezervacija.restoran.naziv}}, by: me
+              </a>
+            </h4>
+          </div>
+
+          <div id="Rezervacija{{rezervacija.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingRezervacija{{rezervacija.id}}"">
+            <div class="panel-body">
+              
+                            <table class="table table-hover">
+                                <tr>
+                                	<th> 
+                                		<div class="col-sm-10">  Organized by: <span class="badge"> Ме </span> </div>
+                                		<div class="col-sm-2"><button type="button" class="btn btn-default" ng-click='deleteReservation(rezervacija)'
+                                			ng-disabled='rezervacija.mandatory'> 
+	                                		<span class='glyphicon glyphicon-remove'></span> 
+	                                    </button> </div>
+                                    </th>
+                                </tr>
+
+
+                                <tr ng-repeat='pozivnica in rezervacija.zvanice'>
+       	                           	<td>
+       	                           		<div class="col-sm-10">
+                                			{{pozivnica.zvanica.username}}
+                                		</div>
+
+                                		<div class="col-sm-2">
+	                                		<span class='glyphicon glyphicon-ok' ng-show='pozivnica.odgovor=="POTVRDJENA"'></span> 
+	                                    	<span class='glyphicon glyphicon-remove' ng-show='pozivnica.odgovor=="OTKAZANA"'></span> 
+	                                    	<span class='glyphicon glyphicon-hourglass' ng-show='pozivnica.odgovor=="POSLATA"'></span> 
+                                    	</div>
+                                	</td>
+
+                                	<!--
+		                            <td ng-show='pozivnica.odgovor=="POTVRDJENA" || pozivnica.odgovor=="POSLATA"'>
+		                            	<button type="button" class="btn btn-default" ng-click='cancelInvitation(rezervacija)'> 
+                                			<span class='glyphicon glyphicon-remove'></span> 
+                                    	</button>
+		                            </td>
+		                            <td ng-show='pozivnica.odgovor=="POSLATA"'>
+		                            	<button type="button" class="btn btn-default" ng-click='acceptInvitation(rezervacija)'> 
+                                			<span class='glyphicon glyphicon-ok'></span> 
+                                    	</button>
+		                            </td>
+		                             <td ng-show='pozivnica.odgovor=="POS"'></td>
+									-->
+                              	</tr>
+                            </table> 
+
+                            <table class="table table-hover">
+									<tr><th><div class="row">
+	                               		<div class='col-sm-7'>
+	                               			<span  ng-show='rezervacija.myVisit.narudzbe.length>0'> Choosen products </span>
+	                               			<span  ng-show='rezervacija.myVisit.narudzbe.length==0'> You havent choose any product yet </span>
+	                               		</div>
+	                               		<div class='col-sm-3'>
+	                               			<span  ng-show='rezervacija.myVisit.narudzbe.length>0'> Order status: </span>
+	                               		</div>
+	                                  	<div class='col-sm-2'>
+	                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addMealModal" 
+	                                    	ng-click='adjustModal(rezervacija.myVisit, rezervacija)'> 
+	                                      	<span class='glyphicon glyphicon-plus'></span> 
+	                                    </button>
+	                                  	</div>
+	                              	</div></th></tr>
+
+                            	 	<tr  ng-repeat='narudzba in rezervacija.myVisit.narudzbe'><td><div class="row">
+                                  		<div class='col-sm-8'> {{narudzba.proizvod.ime}} </div>
+                                  		<div class='col-sm-2'> 
+                                  			<span class='glyphicon glyphicon-hourglass' ng-show='narudzba.status=="ORDERED"'></span> 
+                                  			<span class='glyphicon glyphicon-ok' ng-show='narudzba.status=="APPROVED"'></span> 
+	                                    	<span class='glyphicon glyphicon-remove' ng-show='narudzba.status=="REJECTED"'></span> 
+	                                    	<span class='glyphicon glyphicon-fire' ng-show='narudzba.status=="IN_PROCESS"'></span>
+	                                    	<span class='glyphicon glyphicon-gift' ng-show='narudzba.status=="DONE"'></span>
+                                  		</div>
+                                  		<div class='col-sm-2'>
+                                    		<button type="button" class="btn btn-default" ng-click='ukloniNarudzbu(narudzba, rezervacija.myVisit)'
+                                    			ng-show='narudzba.status=="ORDERED" || narudzba.status=="APPROVED" || narudzba.status=="REJECTED"'> 
+                                      			<span class='glyphicon glyphicon-remove'></span> 
+                                 	   		</button>
+                                 		</div>
+	                              	</div></td></tr>
+                            </table>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+<h3 ng-show='others.invitations.length>0'> My invitations : </h3>
+		<div class="panel panel-default" ng-repeat='pozivnicaMoja in others.invitations' ng-show='pozivnicaMoja.odgovor!="OTKAZANA"'>
+          <div class="panel-heading" role="tab" id="headingPozivnica{{pozivnicaMoja.id}}">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#Pozivnica{{pozivnicaMoja.id}}" aria-expanded="false" aria-controls="Pozivnica{{pozivnicaMoja.id}}">
+                {{pozivnicaMoja.rezervacija.pocetak | date:'dd.MM.yyyy HH:mm' }} @ {{pozivnicaMoja.rezervacija.restoran.naziv}}, by: {{pozivnicaMoja.rezervacija.organizator.username}}
+              </a>
+            </h4>
+          </div>
+
+          <div id="Pozivnica{{pozivnicaMoja.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPozivnica{{pozivnicaMoja.id}}"">
+            <div class="panel-body">
+              
+                            <table class="table table-hover">
+                            	<tr>
+                                	<th> Organized by: {{pozivnicaMoja.rezervacija.organizator.username}} </th>
+                                </tr>
+
+                                <tr ng-repeat='poziv2 in pozivnicaMoja.rezervacija.zvanice'>
+       	                           	<td>
+       	                           		<div class='col-sm-10'>
+	                                		{{poziv2.zvanica.username}} 
+	                                		<span class="badge" ng-show='poziv2.zvanica.id==pozivnicaMoja.zvanica.id'>
+	                                			<span class='glyphicon glyphicon-ok' ng-show='poziv2.odgovor=="POTVRDJENA"'></span> 
+	                                    		<span class='glyphicon glyphicon-remove' ng-show='poziv2.odgovor=="OTKAZANA"'></span> 
+	                                    		<span class='glyphicon glyphicon-hourglass' ng-show='poziv2.odgovor=="POSLATA"'></span> 
+	                                		</span>
+                                		</div>
+                                	
+
+	                                	<div class='col-sm-2' ng-show='poziv2.zvanica.id!=pozivnicaMoja.zvanica.id'>
+	                                		<span class='glyphicon glyphicon-ok' ng-show='poziv2.odgovor=="POTVRDJENA"'></span> 
+	                                    	<span class='glyphicon glyphicon-remove' ng-show='poziv2.odgovor=="OTKAZANA"'></span> 
+	                                    	<span class='glyphicon glyphicon-hourglass' ng-show='poziv2.odgovor=="POSLATA"'></span> 
+	                                	</div>
+
+	                                	<div class="col-sm-2" ng-show='poziv2.zvanica.id==pozivnicaMoja.zvanica.id'>
+
+
+	                                		<button type="button" class="btn btn-default" ng-click='acceptInvitation(poziv2,pozivnicaMoja)' 
+		                                		ng-show='pozivnicaMoja.odgovor=="POSLATA"'> 
+		                                		<span class='glyphicon glyphicon-ok'></span> 
+		                                    </button>
+
+		                                	<button type="button" class="btn btn-default" ng-click='cancelInvitation(poziv2,pozivnicaMoja)' 
+		                                		ng-disabled='pozivnicaMoja.rezervacija.myVisit.mandatory'> 
+		                                		<span class='glyphicon glyphicon-remove'></span> 
+		                                    </button>
+	                                	</div>
+
+	                                </td>
+                                	<!--
+		                            <td ng-show='pozivnica.odgovor=="POTVRDJENA" || pozivnica.odgovor=="POSLATA"'>
+		                            	<button type="button" class="btn btn-default" ng-click='cancelInvitation(rezervacija)'> 
+                                			<span class='glyphicon glyphicon-remove'></span> 
+                                    	</button>
+		                            </td>
+		                            <td ng-show='pozivnica.odgovor=="POSLATA"'>
+		                            	<button type="button" class="btn btn-default" ng-click='acceptInvitation(rezervacija)'> 
+                                			<span class='glyphicon glyphicon-ok'></span> 
+                                    	</button>
+		                            </td>
+		                            <td ng-show='pozivnica.odgovor=="POS"'></td>
+									-->
+                              	</tr>
+                            </table> 
+
+
+                            <table class="table table-hover">
+	                               	<tr><th><div class="row">
+	                               		<div class='col-sm-7'>
+	                               			<span  ng-show='pozivnicaMoja.rezervacija.myVisit.narudzbe.length>0'> Choosen products </span>
+	                               			<span  ng-show='pozivnicaMoja.rezervacija.myVisit.narudzbe.length==0'> You havent choose any product yet </span>
+	                               		</div>
+	                               		<div class='col-sm-3'>
+	                               			<span  ng-show='pozivnicaMoja.rezervacija.myVisit.narudzbe.length>0'> Order status: </span>
+	                               		</div>
+	                                  	<div class='col-sm-2'>
+	                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addMealModal" 
+	                                    	ng-click='adjustModal(pozivnicaMoja.rezervacija.myVisit, pozivnicaMoja.rezervacija)'> 
+	                                      	<span class='glyphicon glyphicon-plus'></span> 
+	                                    </button>
+	                                  	</div>
+	                              	</div></th></tr>
+
+                            	 	<tr  ng-repeat='narudzba in pozivnicaMoja.rezervacija.myVisit.narudzbe'><td><div class="row">
+                                  		<div class='col-sm-8'> {{narudzba.proizvod.ime}} </div>
+                                  		<div class='col-sm-2'> 
+                                  			<span class='glyphicon glyphicon-hourglass' ng-show='narudzba.status=="ORDERED"'></span> 
+                                  			<span class='glyphicon glyphicon-ok' ng-show='narudzba.status=="APPROVED"'></span> 
+	                                    	<span class='glyphicon glyphicon-remove' ng-show='narudzba.status=="REJECTED"'></span> 
+	                                    	<span class='glyphicon glyphicon-fire' ng-show='narudzba.status=="IN_PROCESS"'></span>
+	                                    	<span class='glyphicon glyphicon-gift' ng-show='narudzba.status=="DONE"'></span>
+                                  		</div>
+                                  		<div class='col-sm-2'>
+                                    		<button type="button" class="btn btn-default" ng-click='ukloniNarudzbu(narudzba, pozivnicaMoja.rezervacija.myVisit)'
+                                    			ng-show='narudzba.status=="ORDERED" || narudzba.status=="APPROVED"  || narudzba.status=="REJECTED"'> 
+                                      			<span class='glyphicon glyphicon-remove'></span> 
+                                 	   		</button>
+                                 		</div>
+	                              	</div></td></tr>
+
+                            </table>
+
+
+            </div>
+          </div>
+        </div>
+
+<add-meal></add-meal>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Nalozi xmlns="http://www.ftn.uns.ac.rs/nalog_za_prenos"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/nalog_za_prenos file:/C:/Users/Korisnik/Documents/Nalozi.xsd">
+    <Nalog_za_prenos Hitno="Ne">
+        <Podaci_o_duzniku xsi:type="TFizicko_lice">
+            <Adresa>Travnicka 17, Kula</Adresa>
+            <Ime>Dragutin</Ime>
+            <Prezime>Kljajic</Prezime>
+        </Podaci_o_duzniku>
+        <Podaci_o_poveriocu xsi:type="TPravno_lice">
+            <Adresa>Ne znam adresu ftna</Adresa>
+            <Naziv>Fakultet tehnickih nauka</Naziv>
+        </Podaci_o_poveriocu>
+        <Svrha_placanja>Prijava ispita</Svrha_placanja>
+        <Podaci_o_placanju>
+            <Sifra_placanja>233</Sifra_placanja>
+            <Valuta>Din</Valuta>
+            <Iznos>1500.23</Iznos>
+            <Finansijski_podaci_duznik>
+                <Broj_racuna>123-1726533787929-93</Broj_racuna>
+                <Model>97</Model>
+                <Poziv_na_broj>123456789012345</Poziv_na_broj>
+            </Finansijski_podaci_duznik>
+            <Finansijski_podaci_poverilac>
+                <Broj_racuna>840-1234567890123-28</Broj_racuna>
+                <Model>97</Model>
+                <Poziv_na_broj>321456789032145</Poziv_na_broj>
+            </Finansijski_podaci_poverilac>
+            <Datum_valute>2017-05-27T00:25:03</Datum_valute>
+        </Podaci_o_placanju>
+    </Nalog_za_prenos>
+    <Nalog_za_prenos Hitno="Da">
+        <Podaci_o_duzniku xsi:type="TFizicko_lice">
+            <Adresa>Marsala Tita 35, Vranje</Adresa>
+            <Ime>Teodora</Ime>
+            <Prezime>Mitrovic</Prezime>
+        </Podaci_o_duzniku>
+        <Podaci_o_poveriocu xsi:type="TPravno_lice">
+            <Adresa>Ne znam adresu ftna</Adresa>
+            <Naziv>Fakultet tehnickih nauka</Naziv>
+        </Podaci_o_poveriocu>
+        <Svrha_placanja>Overa semestra</Svrha_placanja>
+        <Podaci_o_placanju>
+            <Sifra_placanja>233</Sifra_placanja>
+            <Valuta>Din</Valuta>
+            <Iznos>150000.23</Iznos>
+            <Finansijski_podaci_duznik>
+                <Broj_racuna>123-9338670954849-69</Broj_racuna>
+                <Model>97</Model>
+                <Poziv_na_broj>456231456820134</Poziv_na_broj>
+            </Finansijski_podaci_duznik>
+            <Finansijski_podaci_poverilac>
+                <Broj_racuna>123-8880775775674-13</Broj_racuna>
+                <Model>97</Model>
+                <Poziv_na_broj>321456789032145</Poziv_na_broj>
+            </Finansijski_podaci_poverilac>
+            <Datum_valute>2017-01-05T00:25:03</Datum_valute>
+        </Podaci_o_placanju>
+    </Nalog_za_prenos>
+</Nalozi>

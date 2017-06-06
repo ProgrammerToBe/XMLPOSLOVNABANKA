@@ -1,0 +1,41 @@
+<div ng-controller="CertificateRevokeAndGetStatus as cRGS" >
+	<div ng-init="cRGS.init()">
+		<div class="row">
+			  		<div class="col-sm-4"></div>
+			  		<div class="col-sm-4">
+						<div class="panel panel-default">
+							<div class="panel-body">
+		<form name="myForm" ng-submit="cRGS.sendRevocationRequest(revokeRequest)">
+		<fieldset class="form-group">
+		<!---Combo Box za izbor banke dok nije bilo regulisano logovanje-->
+		<!--
+			<label for="repeatSelect"> Izaberite izdavaoca sertifikata: </label>
+	
+			<select name="repeatSelect"  ng-model="bank" id="repeatSelect" ng-options="bankItem.name for bankItem in banks" class="form-control">
+			
+			<option value="" >Please Select</option>
+			</select>  
+		</fieldset> -->
+		<fieldset class="form-group">
+			<label>Serijski broj</label>
+			<input type="text" class="control-form" placeholder="Unesite alijas" ng-model="revokeRequest.alias"/>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Zalba</label>
+		</fieldset>
+		<fieldset class="form-group">
+			
+			<textarea name="Text1" cols="50" rows="6" ng-model="revokeRequest.comment"></textarea>
+		</fieldset>
+			
+				<input  type="submit" class="btn btn-lg btn-primary btn-block pull-right" value="Generate" />
+				
+		</form>
+		
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+	</div>
+</div>

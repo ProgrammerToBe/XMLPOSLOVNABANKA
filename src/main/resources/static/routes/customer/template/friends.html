@@ -1,0 +1,25 @@
+<div class='row'>
+
+	 <ul class="nav nav-tabs">
+
+	  <li><a data-toggle="tab" class="active" data-target="#friendsEstablishedPane" ng-click='friendsEstablished.viewRelations()'> 
+	  		Friends <span class="badge" ng-show='friendsEstablished.notificationsCount>0'>{{friendsEstablished.notificationsCount}}</span> 
+	  </a></li>
+
+	  <li><a data-toggle="tab" data-target="#friendsRequestsPane"  ng-click='friendsRequests.viewRelations()'> 
+	  		Requests <span class="badge" ng-show='friendsRequests.notificationsCount>0'>{{friendsRequests.notificationsCount}}</span>
+	  </a></li>
+	  
+	  <li><a data-toggle="tab" data-target="#friendsSearchPane"> Search </a></li>
+	
+	</ul>
+
+	<div class="tab-content">
+
+	  	<div id="friendsEstablishedPane" class="tab-pane fade in active" friends-established></div>
+		<div id="friendsRequestsPane" class="tab-pane fade" friends-requests></div>      	
+	   	<div id="friendsSearchPane" class="tab-pane fade" search-friends></div>
+	   	
+
+	</div>
+</div> 

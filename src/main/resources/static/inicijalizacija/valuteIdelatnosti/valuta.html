@@ -1,0 +1,104 @@
+<div  ng-controller = "RukovanjeSifrarnikomValuta as rsv" data-ng-init="rsv.init()">
+
+	<div class="panel panel-default" id ="sveobuhvatniNM">
+	
+		<!-- <div id="table-wrapper">-->
+		  <div id="table-scroll"> 
+		    <table class="table table-hover">
+		        <thead>
+		            <tr class="text">
+		                <th><span >OZNAKA</span></th>
+		                <th><span >NAZIV</span></th>
+		          
+		               
+		            </tr>
+		        </thead>
+		        <tbody>
+			      <!-- <tr ng-repeat="item in sifrarnikValuta track by valuta.id" ng-click="rnm.setSelected(valuta)"
+			         ng-class="{selected: item.id === valutaId}" >  -->
+					 <!--ng-click="rsv.setSelected(item)" ng-class="{selected: item.id===valutaId}"--->
+					 <!--track item.id -->
+					 <tr ng-repeat="item in sifrarnikValuta "  ng-click="rsv.setSelected(item)" ng-class="{selected: item.id==valutaId}">
+					
+			        	<td>{{item.code}}</td>
+			        	<td>{{item.name}}</td>
+						
+			        </tr>  
+		         
+		        </tbody>
+		    </table>
+		  </div>
+		 <!--</div> -->
+	</div>
+	
+	 <div class="container" id="dugmici">
+	  	<div class="btn-group">
+		  <button type="button" class="btn btn-default" ng-click ="rsv.searchClick()"><img src="ikonice/search.gif" width="20" /></button>
+		  <button type="button" class="btn btn-default" ng-click ="rsv.refresh()"><img src="ikonice/refresh.gif" width="20" /></button>
+		  <button type="button" class="btn btn-default"><img src="ikonice/zoom-pickup.gif" width="20" /></button>
+		  <button type="button" class="btn btn-default"><img src="ikonice/help.gif" width="20" /></button>
+		</div>
+		<div class="btn-group">
+		  <button type="button" class="btn btn-default" ng-click ="rsv.firstClick()"><img src="ikonice/first.gif" width="20" /></button>
+		  <button type="button" class="btn btn-default" ng-click ="rsv.prevClick()"><img src="ikonice/prev.gif" width="20" /></button>
+		  <button type="button" class="btn btn-default" ng-click ="rsv.nextClick()"><img src="ikonice/next.gif" width="20" /></button>
+		  <button type="button" class="btn btn-default" ng-click ="rsv.lastClick()"><img src="ikonice/last.gif" width="20" /></button>
+		</div>
+		<div class="btn-group">
+		  <button type="button" class="btn btn-default" ng-click ="rsv.addClick()"><img src="ikonice/add.gif" width="20" /></button>
+		  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#deleteItem">
+			<img src="ikonice/remove.gif" width="20"  />
+		
+		</button>
+		</div>
+		
+		<div class="btn-group">
+		  <button type="button" class="btn btn-default" ><img src="ikonice/nextform.gif" width="20" /></button>
+		  
+		</div>
+		
+		<div class="panel panel-info">
+			<p> <h4>Rezim za {{rezim | stringRezima}}</h4></p>
+		</div>
+		
+	  <div class="panel panel-default">
+	   		<div class="panel-body">
+	   			<div>
+		   			<p>Oznaka valute : <input type="text" ng-model="valuta.code" required autofocus></p>
+		   			<p>Naziv valute : <input type="text" ng-model="valuta.name" maxlength="40" required></p>
+		   		
+	   			<div class="container" id="dugmici">
+	  				<div class="btn-group">
+		  				<button type="button" class="btn btn-default" ng-click ="rsv.commitClick()"><img src="ikonice/commit.gif" width="20" /></button>
+		  				<button type="button" class="btn btn-default" ng-click ="rsv.rollbackClick()"><img src="ikonice/remove.gif" width="20" /></button>
+		  			</div>
+		  		</div>
+	   		
+	   		</div>
+	  </div>
+	
+	</div>
+<!---DIALOG-->
+<div id="deleteItem" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Da li ste sigurni da zelite da izbrisete stavku?</p>
+      </div>
+      <div class="modal-footer">
+		<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="rsv.deleteClick()">DA</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="rsv.deleteClick()">NE</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!---DIALOG-->
+	
+</div>

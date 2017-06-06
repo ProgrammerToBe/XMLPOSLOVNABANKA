@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html  ng-app= "administrator">
+<head>
+<meta charset="UTF-8">
+<title>Startup</title>
+
+<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>-->
+<script type="text/javascript" src="../js/vendor/jquery-3.1.1.min.js"></script>
+	
+<script type="text/javascript" src="../js/vendor/angular.min.js"></script>
+<script type="text/javascript" src="../js/vendor/angular-cookies.js"></script>
+	<script type="text/javascript" src="../js/vendor/angular-route.min.js"></script>
+
+	<!--  toaster -->
+	<link href="../css/vendor/toastr.min.css" rel="stylesheet"/>
+	<script type="text/javascript" src="../js/vendor/toastr.min.js"></script>
+	
+	<!-- bootstrap -->
+	<link href="../css/vendor/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="../js/vendor/bootstrap.min.js"></script>
+
+
+<script type="text/javascript" src="../js/vendor/angular-local-storage.min.js"></script>
+
+<script type = "text/javascript" src="../directives/login/cookieModul.js"></script>
+<script type = "text/javascript" src="geografija/AdminScript.js"></script>
+<script type = "text/javascript" src="geografija/AdminScript1.js"></script>
+<script type = "text/javascript" src="geografija/NMScript.js"></script>
+
+<script type="text/javascript" src="valuteIdelatnosti/valuta.js"></script>
+<script type="text/javascript" src="valuteIdelatnosti/activities.js"></script>
+<script type="text/javascript" src="messages/message.js"></script>
+<script type = "text/javascript" src="klijenti/KlijentScript.js"></script>
+<script type = "text/javascript" src="klijenti/PravnoLiceScript.js"></script>
+<script type = "text/javascript" src="klijenti/RacunScript.js"></script>
+<script type = "text/javascript" src="klijenti/ZatvaranjaScript.js"></script>
+<script type = "text/javascript" src="klijenti/DnevnaStanjaScript.js"></script>
+<script type = "text/javascript" src="klijenti/AnalitikeIzvodaScript.js"></script>
+<script type = "text/javascript" src="izmena/izmenaScript.js"></script>
+
+<link rel="stylesheet" href="css/drzave.css" > 
+<!-- 
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  
+
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<!-- 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ -->
+<!-- Latest compiled and minified JavaScript -->
+<!-- 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ -->
+</head>
+
+ <body ng-controller = "Opsti as opsti" data-ng-init="init()"> 
+ <button ng-click = "opsti.logoff()">LOGOFF</button>
+ <input type="file" multiple name="files" filelist-bind/>
+<!-- <body> -->
+ <ul class="nav nav-tabs"> 
+    <li ng-class="{active: tab === 0}"><a href="#" ng-click="opsti.tabClick(0)"><h4>Home</h4></a></li>
+    <li ng-class="{active: tab === 1}"><a href="#" ng-click="opsti.tabClick(1)"><h4>Drzave</h4></a></li>
+    <li ng-class="{active: tab === 2}"><a href="#" ng-click="opsti.tabClick(2)"><h4>Naseljena mesta</h4></a></li>
+    <li ng-class="{active: tab === 3}"><a href="#" ng-click="opsti.tabClick(3)"><h4>Valute</h4></a></li>
+	<li ng-class="{active: tab === 4}"><a href="#" ng-click="opsti.tabClick(4)"><h4>Djelatnosti</h4></a></li>
+  	<li ng-class="{active: tab === 5}"><a href="#" ng-click="opsti.tabClick(5)"><h4>Fizicka lica</h4></a></li>
+	<li ng-class="{active: tab === 6}"><a href="#" ng-click="opsti.tabClick(6)"><h4>Pravna lica</h4></a></li>
+	<li ng-class="{active: tab === 7}"><a href="#" ng-click="opsti.tabClick(7)"><h4>Racuni</h4></a></li>
+	<li ng-class="{active: tab === 8}"><a href="#" ng-click="opsti.tabClick(8)"><h4>Zatvaranja</h4></a></li>
+	<li ng-class="{active: tab === 9}"><a href="#" ng-click="opsti.tabClick(9)"><h4>Poruke</h4></a></li>
+	<li ng-class="{active: tab === 10}"><a href="#" ng-click="opsti.tabClick(10)"><h4>Dnevna stanja</h4></a></li>
+	<li ng-class="{active: tab === 11}"><a href="#" ng-click="opsti.tabClick(11)"><h4>Analitike izvoda</h4></a></li>
+	<li ng-class="{active: tab === 13}"><a href="#" ng-click="opsti.tabClick(13)"><h4>Izmena lozinke</h4></a></li>
+  </ul>
+ <nav>
+<div >
+    <div id="home" class="tab-pane fade in active" ng-show='tab == 0'>
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="drzave" class="tab-pane fade in active" ng-show='tab == 1'>
+    
+      <div ng-include="'geografija/Drzave.html'"></div>
+    </div>
+    <div id="naseljenaMesta" class="tab-pane fade in active" ng-show='tab == 2'>
+      <h2>Naseljena</h2>
+      <div ng-include="'geografija/NaseljenaMesta.html'"></div>
+    </div>
+	<div id="valute" class="tab-pane fade in active" ng-show='tab == 3'>
+      <h2>Valute</h2>
+      <div ng-include="'valuteIdelatnosti/valuta.html'"></div>
+    </div>
+	<div id="valute" class="tab-pane fade in active" ng-show='tab == 4'>
+      
+      <div ng-include="'valuteIdelatnosti/activities.html'"></div>
+    </div>
+    <div id="klijenti" class="tab-pane fade in active" ng-show='tab == 5'>
+      
+      <div ng-include="'klijenti/Klijenti.html'"></div>
+    </div>
+    <div id="pravnaLica" class="tab-pane fade in active" ng-show='tab == 6'>
+      
+      <div ng-include="'klijenti/PravnaLica.html'"></div>
+    </div>
+    <div id="racuni" class="tab-pane fade in active" ng-show='tab == 7'>
+      
+      <div ng-include="'klijenti/Racuni.html'"></div>
+    </div>
+    <div id="zatvaranja" class="tab-pane fade in active" ng-show='tab == 8'>
+      
+      <div ng-include="'klijenti/Zatvaranja.html'"></div>
+    </div>
+	<div id="poruke" class="tab-pane fade in active" ng-show='tab == 9'>
+      
+      <div ng-include="'messages/messages.html'"></div>
+    </div>
+    
+    <div id="dnevnaStanja" class="tab-pane fade in active" ng-show='tab == 10'>
+      
+      <div ng-include="'klijenti/DnevnaStanja.html'"></div>
+    </div>
+    
+    <div id="analitike" class="tab-pane fade in active" ng-show='tab == 11'>
+      
+      <div ng-include="'klijenti/AnalitikeIzvoda.html'"></div>
+    </div>
+    
+    
+    <div id="izmena" class="tab-pane fade in active" ng-show='tab == 13'>
+      
+      <div ng-include="'izmena/izmenaHTML.html'"></div>
+    </div>
+    
+  </div>
+ </nav>
+</body>
+</html>

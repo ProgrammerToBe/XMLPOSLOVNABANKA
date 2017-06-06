@@ -1,0 +1,36 @@
+<div>
+	<div  class="row">
+		<div class="col-xs-8 col-xs-offset-2">
+		<form class="form-inline" name="findFriendForm" style="margin:10" >
+	   	    <div class="form-group">
+		    	<label for="searchInput">Name, surname or username: </label>
+		    	<input type="text" class="form-control" id="searchInput" placeholder="Name,surname or username..." ng-model="friendsSearch.searchKey">
+		  	</div>
+		  	<button type="button" class="btn btn-default" ng-click='friendsSearch.allMyPossibleFriends()' ng-disabled='friendsSearch.searchKey.trim()==""'> <span class="glyphicon glyphicon-search"> </span></button>
+		</form>
+		</div>
+
+		<div class="col-xs-8 col-xs-offset-2">
+		<table class="table table-hover" ng-show='friendsSearch.hasResult'>
+		  <tr>
+		  	<th>username</th>
+		  	<th>Name</th>
+		  	<th>Lastname</th>
+		  	<th>Add</th>
+		  </tr>
+
+		  <tr ng-repeat='posibleRelationship in friendsSearch.relations'>
+		  	<td> {{posibleRelationship.destination.username}} </td>
+		  	<td> {{posibleRelationship.destination.name}} </td>
+		  	<td> {{posibleRelationship.destination.surname}} </td>
+		  	<td> 
+		  		<button type="button" class="btn btn-default button-expanded" ng-click='friendsSearch.sendRequest(posibleRelationship)'> <span class="glyphicon glyphicon-plus"> </span></button> 
+		  	</td>
+		  </tr>
+
+
+		</table>
+		</div>
+	</div>
+
+</div>

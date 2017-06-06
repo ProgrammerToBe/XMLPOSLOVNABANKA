@@ -1,0 +1,45 @@
+#table-wrapper {
+	margin : auto;
+  	position:relative;
+  	
+}
+#table-scroll {
+	margin : auto;
+	height:200px;
+	overflow:auto;  
+	margin-top:20px;
+	
+	
+}
+#table-wrapper table {
+	
+	width:100%;
+	
+}
+#table-wrapper table * {
+	background:white;
+	color:black;
+}
+#table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
+  border:1px solid blue;
+}
+
+#dugmici {
+	margin-top: 30px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.selected {background-color: #ffff66}
+
+tr:hover {background-color: #f5f5f5}

@@ -1,0 +1,37 @@
+<!-- Modal -->
+<div class="modal fade  bs-example-modal-xs" id="chooseRoomModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+
+        <h4 class="modal-title" id="chooseRoomTitle"> Choose room where you want to eat </h4>
+      </div>
+
+
+      <div class="modal-body">
+          <table class="table table-hover">
+              <tr  ng-repeat='posibleRoom in sale'><td><div class="row">
+                <div class='col-sm-4'> {{posibleRoom.naziv}} </div>
+                <div class='col-sm-2 col-sm-offset-6'>
+                  <button type="button" class="btn btn-default" ng-click='chooseRoom(posibleRoom)'> 
+                    <span class='glyphicon glyphicon-ok'></span> 
+                  </button>
+                </div>
+            </div></td></tr>
+          </table>
+
+      </div> <!-- content -->
+
+
+      
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" data-dismiss="modal" id="reservationsRoomOk">Ok</button>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal" id="registerInfoCancel">Cancel</button> -->
+      </div>
+      
+    </div>
+  </div>
+</div>

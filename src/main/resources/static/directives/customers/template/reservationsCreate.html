@@ -1,0 +1,220 @@
+			<div class='col-xs-12' id='createPanel'>
+				<form class="form-horizontal" name="createReservationForm"  novalidate> <!-- ng-controller="registerController as regCtrl" -->
+
+					<div class="row">
+					<div class="col-sm-offset-2 col-sm-8">
+						<h3> Create your own reservation:  </h3>
+					</div>
+					</div>
+<!-- 
+
+					<div class="form-group">
+				    	<label for="datepicker" class="col-xs-4 control-label"> date: </label>
+				    	
+				    	<div class='col-xs-3'>
+					        <p class="input-group">
+					  	      <input type="text" name='datepicker' class="form-control" uib-datepicker-popup="{{datepicker.format}}" ng-model="reservation.date" is-open="datepicker.opened" datepicker-options="datepicker.dateOptions" close-text="Close" readonly required/>
+					          <span class="input-group-btn">
+					    	        <button type="button" class="btn btn-default" ng-click="datepicker.open()"><i class="glyphicon glyphicon-calendar"></i></button>
+					          </span>
+					        </p>
+					    </div>
+				  	</div>
+ -->
+ 				<div class="col-xs-7"> <!--left side -->
+
+					<p class="input-group">
+						<span class="input-group-addon" id="sizing-addon2"> Date: </span>
+					    <input type="text" name='datepicker' class="form-control" uib-datepicker-popup="{{datepicker.format}}" ng-model="reservation.date" is-open="datepicker.opened" datepicker-options="datepicker.dateOptions" close-text="Close" readonly required/>
+					    <span class="input-group-btn">
+					        <button type="button" class="btn btn-default" ng-click="datepicker.open()"><i class="glyphicon glyphicon-calendar"></i></button>
+					    </span>
+					</p>
+
+
+<!-- ng-model='restoran' -->
+<!-- 
+				  	<div class="form-group">
+				    	<label for="restaurant"  class="col-xs-2 control-label"> restaurant: </label>
+				    	
+				    	<div class='col-xs-5'><select class="form-control" ng-model='restoranId' name="restaurant">   
+				    		<option ng-repeat='restoranOption in restaurants' value="{{restoranOption.id}}">{{restoranOption.naziv}}</option>
+				    	</select></div>
+				  	</div> 
+-->
+					
+					<p class="input-group">
+					  <span class="input-group-addon" id="sizing-addon2"> Choosen restaurant: </span>
+					  <input type="text" class="form-control" placeholder="You haven't choose any restaurant yet" aria-describedby="sizing-addon2" 
+					  		value="{{reservation.restoran.naziv}}" readonly required>
+					  <span class="input-group-btn">
+				        <button class="btn btn-default" type="button"  data-toggle="modal" data-target="#chooseRestaurantModal"> Choose restaurant </button>
+				      </span>
+					</p>
+
+					<p class="input-group">
+					  <span class="input-group-addon" id="sizing-addon2"> Choosen room: </span>
+					  <input type="text" class="form-control" placeholder="You haven't choose any room yet" aria-describedby="sizing-addon2" 
+					  		value="{{reservation.sala.naziv}}" readonly required>
+					  <span class="input-group-btn">
+				        <button class="btn btn-default" type="button"  data-toggle="modal" data-target="#chooseRoomModal"
+				        	ng-disabled='reservation.restoran==undefined || sale.length==0'> Choose room </button>
+				      </span>
+					</p>
+
+					<p class="input-group">
+					  <span class="input-group-addon" id="sizing-addon2"> Choosen table: </span>
+					  <input type="text" class="form-control" placeholder="You haven't choose any table yet" aria-describedby="sizing-addon2" 
+					  		value="{{reservation.sto.code}}" readonly required/>
+					  <span class="input-group-btn">
+				        <button class="btn btn-default" type="button"  data-toggle="modal" data-target="#chooseTableModal"
+				        	ng-disabled='reservation.sala==undefined || reservation.sala.width==0 || reservation.sala.height==0'
+							ng-click='detectAllReservations()'> Choose table </button>
+				      </span>
+					</p>
+
+
+					<!-- ng-model='restoran' -->
+					<!--
+				  	<div class="form-group">
+				    	<label for="sala"  class="col-xs-2 control-label"> room: </label>
+				    	
+				    	<div class='col-xs-5'><select class="form-control" ng-model='salaId' name='sala'> 
+				    		<option ng-repeat='salaOption in restaurants[restoranId].sale' value="{{salaOption.id}}">{{salaOption.naziv}}</option>
+				    	</select></div>
+				  	</div>
+				  	-->
+
+				  	<!-- <div class="form-group"> -->
+					  	
+					  	<table class="table table-hover">
+					  		<tr><th><div class='row'>
+					  				<div class="col-xs-8">
+							  					<span ng-show='friendsEstablished.choosen.length>0'> Friends to be invited: </span> 
+								  				<span ng-show='friendsEstablished.choosen.length==0 && friendsEstablished.all.length>0'> 
+								  					You didn't add any friend yet: 
+								  				</span> 
+								  				<span ng-show='friendsEstablished.choosen.length==0  &&  friendsEstablished.all.length==0'> 
+								  					No friends to invite: 
+								  				</span> 
+					  				</div>
+					  				<div class="col-sm-offset-1 col-sm-3">
+					  							<button type="button" class="btn btn-default" ng-show='friendsEstablished.all.length>0'  data-toggle="modal" data-target="#friendsInviteModal"> Invite friends </button>
+					  				</div>
+					  		</div></th></tr>
+
+					    	<tr ng-repeat='chosenFriend in friendsEstablished.choosen'><td><div class='row'>
+					    			<div class='col-xs-8'> 
+					    					{{chosenFriend.destination.username}} 
+					    			</div>
+						    		<div class="col-xs-3 col-sm-offset-1">  
+							    			<button type="button" class="btn btn-default" ng-click='dontInviteFriend(chosenFriend)'> 
+							    				<span class='glyphicon glyphicon-remove'></span> 
+							    			</button> 
+						    		</div>
+					    	</div></td></tr>
+					  	</table>
+				  	<!-- </div> -->
+
+					  	<table class="table table-hover">
+					  		<tr><th><div class='row'>
+					  				<div class="col-xs-8">
+						  						<span ng-show='reservation.meal.length>0'> You are ordering: </span> 
+						  						<span ng-show='reservation.meal.length==0'> You haven't order anything yet: </span> 
+					  				</div>
+					  				<div class="col-sm-offset-1 col-sm-3">
+					  							<button type="button" class="btn btn-default"  ng-disabled='reservation.restoran==undefined' 
+					  								data-toggle="modal" data-target="#chooseMealModal"> Order meal </button>
+					  				</div>
+					  		</div></th></tr>
+
+					    	<tr ng-repeat='narudzba in reservation.meal'><td><div class='row'>
+					    			<div class='col-xs-8'> 
+					    						{{narudzba.proizvod.ime}} 
+					    			</div>
+						    		<div class="col-xs-3 col-sm-offset-1">  
+								    			<button type="button" class="btn btn-default" 
+								    				ng-click='cancelProduct(narudzba)'> 
+									    			<span class='glyphicon glyphicon-remove'></span> 
+									    		</button>
+						    		</div>
+					    	</div></td></tr>
+					  	</table>
+
+				  	<!-- <div class="form-group"> -->
+<!-- 					  	<table class="table table-striped">
+					  		<tr><th> 
+					  				<span ng-show='reservation.meal.length>0'> You are ordering: </span> 
+					  				<span ng-show='reservation.meal.length==0'> You haven't order anything yet: </span> 
+					  			</th>  
+					  			<th>
+					  				<button type="button" class="btn btn-default" ng-show='friendsEstablished.all.length>0'  data-toggle="modal" data-target="#chooseMealModal"> Order meal </button>
+					  			</th>
+					  		</tr>
+					    	<tr ng-repeat='narudzba in reservation.meal'> 
+					    		<td> {{narudzba.proizvod.ime}} </td>
+					    		<td> <button type="button" class="btn btn-default" ng-click='cancelProduct(narudzba)'> 
+					    			<span class='glyphicon glyphicon-remove'></span> 
+					    		</button> </td>
+					    	</tr>
+					  	</table> -->
+				  	<!-- </div> -->
+				
+
+				</div> <!--left side -->
+
+				<div class='col-xs-5'> <!-- right side -->
+
+				  	<div class="form-group">
+				    	<label for="timeStart"  class="col-xs-7 control-label timeLabel"> starts at: (after 8:00 ): </label>
+				    	
+				    	<div class='col-xs-5'>
+					        <p><div 
+					        		uib-timepicker ng-model="reservation.timeStart"  name='timeStart'
+						  	      	minute-step="15" hour-step="1"  
+						  	      	max ="timepicker.distanceDown" min="timepicker.min"
+						  	      	show-meridian="false"  required 
+						  	    > 	
+						  	</div></p>
+					    </div>
+				  	</div>
+
+				  	<div class="form-group">
+				    	<label for="timeEnd"  class="col-xs-7 control-label timeLabel"> ends at: (before 22:00 ): </label>
+				    	
+				    	<div class='col-xs-5'>
+					        <p><div 
+					        		uib-timepicker ng-model="reservation.timeEnd"  name='timeEnd'
+						  	      	minute-step="15" hour-step="1"  
+						  	      	max ="timepicker.max" min="timepicker.distanceUp"
+						  	      	show-meridian="false"  required 
+						  	    > 	
+						  	</div></p>
+					    </div>
+				  	</div>
+
+
+				</div>  	<!-- right side -->
+
+
+
+				    <div class="col-sm-offset-8 col-sm-1">
+				      <button type="submit" class="btn btn-default"  ng-click='send()'  ng-disabled='createReservationForm.$invalid || reservation.sto.code == undefined || reservation.sto.code.trim()==""'>send</button><!--ng-click="regCtrl.registration()" -->
+				    </div>
+				
+
+
+
+				</form>
+
+				
+
+			</div>
+
+
+
+<friends-invite> </friends-invite>
+<choose-restaurant></choose-restaurant>
+<choose-room></choose-room>
+<choose-meal></choose-meal>
+<choose-table></choose-table>

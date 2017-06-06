@@ -1,0 +1,28 @@
+<div ng-controller="CertificateStatus as cS">
+<div ng-init="cS.init()">
+<div class="row" >
+	
+		<div class="col-sm-4 col-offset-4">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form name="myForm" ng-submit="cS.getCertificateStatus(bank,alias)">
+				<!--	<fieldset class="form-group">
+						<label for="repeatSelect"> Izaberite izdavaoca sertifikata: </label>
+				
+						<select name="repeatSelect"  ng-model="bank" id="repeatSelect" ng-options="bankItem.name for bankItem in banks" class="form-control">
+						
+						<option value="" >Please Select</option>
+						</select>  
+					</fieldset> -->
+					<fieldset class="form-group">
+						<label>Serijski broj</label>
+						<input type="text" class="control-form" placeholder="Unesite serijski broj" ng-model="alias"/>
+					</fieldset>
+						<input  type="submit" class="btn btn-lg btn-primary btn-block pull-right" value="Generate" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

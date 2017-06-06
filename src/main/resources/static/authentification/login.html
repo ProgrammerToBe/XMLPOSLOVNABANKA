@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html  ng-app= "logovanje">
+<head>
+<meta charset="UTF-8">
+<title>Startup</title>
+
+<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>-->
+<script type="text/javascript" src="../js/vendor/jquery-3.1.1.min.js"></script>
+	
+<script type="text/javascript" src="../js/vendor/angular.min.js"></script>
+	<script type="text/javascript" src="../js/vendor/angular-ui-router.min.js"></script>
+
+	<!--  toaster -->
+	<link href="../css/vendor/toastr.min.css" rel="stylesheet"/>
+	<script type="text/javascript" src="../js/vendor/toastr.min.js"></script>
+	
+	<!-- bootstrap -->
+	<link href="../css/vendor/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="../js/vendor/bootstrap.min.js"></script>
+
+
+<script type="text/javascript" src="../js/vendor/angular-local-storage.min.js"></script>
+
+<script type = "text/javascript" src="../directives/login/cookieModul.js"></script>
+
+<script type = "text/javascript" src="loginScript.js"></script>
+<!-- 
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  
+
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<!-- 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ -->
+<!-- Latest compiled and minified JavaScript -->
+<!-- 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ -->
+</head>
+ <body ng-controller="LogovanjeCtrl as logCtrl"> 
+	<div class="container">
+	  <div class="jumbotron">
+	    <h1>Logovanje</h1> 
+	    	<form name = "userForm"  
+						ng-submit = "userForm.$valid && logCtrl.submitClick()">
+			    <div class="input-group">
+			      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			      <input type="text" class="form-control" placeholder="Korisnicko ime" ng-model="user.username" required>
+			    </div>
+			    <div class="input-group">
+			      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			      <input type="password" class="form-control" placeholder="Lozinka" ng-model="user.password" required>
+			    </div>
+			    <button type="submit" class="btn btn-default" >Potvrdi</button>
+			</form>
+	  </div>
+	  
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+		#notificationsPanel{
+			border-left-width: 1px;
+			border-left-color: gray;
+			border-left-style: solid;
+			/*text-align: center;*/
+		}
+
+		form.form-inline{
+			margin: 15px;
+			/*text-align: center;*/
+		}
+
+		.button-expanded{
+			display: block; 
+			width: 100%; 
+			height: :100%;
+		}
+
+		ul {
+		  list-style-type: none;
+		}
+		
+		.timeLabel {
+			position: relative;
+			top: 40px;
+		}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html ng-app="certificates">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Certificate generator</title>
+		
+		<script type="text/javascript" src="../js/vendor/angular.min.js"></script>
+		<script type="text/javascript" src="../js/vendor/angular-route.min.js"></script>
+		<script type="text/javascript" src="../js/vendor/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/vendor/bootstrap.min.js"></script>
+
+		<!--  toaster -->
+		<link href="../css/vendor/toastr.min.css" rel="stylesheet"/>
+		<script type="text/javascript" src="../js/vendor/toastr.min.js"></script>
+	
+		<!-- bootstrap -->
+		<link href="../css/vendor/bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="../js/vendor/bootstrap.min.js"></script>
+		
+		
+		<!--<script type = "text/javascript" src="js/revokeAndGetStatus.js"></script> -->
+		<script type = "text/javascript" src="js/certificates.js"></script>
+		<link rel="stylesheet" href="css/certificates.css" > 
+	</head>
+	<body ng-controller="TabController as tab">
+		<nav class="navbar navbar-inverse">
+	  		<div class="container-fluid">
+	    		<div class="navbar-header">
+	     			 <a class="navbar-brand" href="certificates.html">Home</a>
+	   			 </div>
+	   			<section>
+		    		<ul class="nav navbar-nav">
+		    			<li ng-class="{active:tab.isSet(1)}"><a class="navbar-brand" href ng-click="tab.setTab(1)">Generate certificate</a></li>
+		    			<li ng-class="{active:tab.isSet(2)}"><a class="navbar-brand" href ng-click="tab.setTab(2)">View certificate</a></li>
+
+						
+
+		    			<li ng-class="{active:tab.isSet(3)}"><a class="navbar-brand" href ng-click="tab.setTab(3)">Generate CSR</a></li>
+
+
+						<li ng-class="{active:tab.isSet(4)}"><a class="navbar-brand" href ng-click="tab.setTab(4)">Generate revocation request</a></li>
+						<li ng-class="{active:tab.isSet(5)}"><a class="navbar-brand" href ng-click="tab.setTab(5)">Revoke certificate</a></li>
+						<li ng-class="{active:tab.isSet(6)}"><a class="navbar-brand" href ng-click="tab.setTab(6)">Status</a></li>
+
+		    			<li ng-class="{active:tab.isSet(7)}"><a class="navbar-brand" href ng-click="tab.setTab(7)">Approve certificates</a></li>
+
+
+		    		</ul>
+	    		</section>
+	    		<ul class="nav navbar-nav navbar-right">
+	     			<li><a class="btn"><span class="glyphicon glyphicon-log-in"></span> Close keystore</a></li>
+	    		</ul>
+	  		</div>
+		</nav>
+		<div ng-controller="CertificateController as certCtrl">
+			<div ng-show="tab.isSet(1)">
+				  	<div class="row">
+				  		<div class="col-sm-4"></div>
+				  		<div class="col-sm-4">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<form name="genCertificateForm" ng-submit="genCertificateForm.$valid && certCtrl.generate()" class="form-signin" novalidate >
+										<h3>Generate certificate: </h3>
+										<!--  
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.alias" type="text" class="form-control" placeholder="Certificate alias:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.keyAlias" type="text" class="form-control" placeholder="Private key alias:" required></input>
+										</fieldset>
+										-->
+										<!--  
+										<fieldset class="form-group">
+								  			<label class="control-label">Self-signed?<input ng-model="certCtrl.certificate.selfSigned" type="checkbox" class="form-control" ng-change="certCtrl.resetIssuer()"></input></label>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.issuerAlias" type="text" class="form-control" placeholder="Issuer alias:" ng-show="!certCtrl.certificate.selfSigned"></input>
+										</fieldset>
+										-->
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.cn" type="text" class="form-control" placeholder="CN:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.surname" type="text" class="form-control" placeholder="Surname:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.givenName" type="text" class="form-control" placeholder="Given name:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.organization" type="text" class="form-control" placeholder="Organization:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.organizationUnit" type="text" class="form-control" placeholder="Organization unit:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.country" type="text" class="form-control" placeholder="Country:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.email" type="email" class="form-control" placeholder="Email:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.uid" type="text" class="form-control" placeholder="UID:" required></input>
+										</fieldset>
+										<!--  
+										<fieldset class="form-group">
+								  			<label class="control-label">Certificate authority?<input ng-model="certCtrl.certificate.ca" type="checkbox" class="form-control"></input></label>
+										</fieldset>
+										-->
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.validFrom" type="date" class="form-control" placeholder="Valid from:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificate.validTo" type="date" class="form-control" placeholder="Valid until:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+			                				<input  type="submit" class="btn btn-lg btn-primary btn-block pull-right" value="Generate" />
+			              				</fieldset>
+										<hr></hr>
+										<fieldset><div></div>{{certCtrl.result}}</fieldset><br />
+									</form>
+								</div>
+							</div>
+				  		</div>
+				  		<div class="col-sm-4"></div>
+				  	</div>
+			</div>
+			<div ng-show="tab.isSet(3)">
+				  	<div class="row">
+				  		<div class="col-sm-4"></div>
+				  		<div class="col-sm-4">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<form name="genCertificateRequestForm" ng-submit="genCertificateRequestForm.$valid && certCtrl.generateRequest()" class="form-signin" novalidate >
+										<h3>Generate certificate request: </h3>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.cn" type="text" class="form-control" placeholder="CN:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.surname" type="text" class="form-control" placeholder="Surname:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.givenName" type="text" class="form-control" placeholder="Given name:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.organization" type="text" class="form-control" placeholder="Organization:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.organizationUnit" type="text" class="form-control" placeholder="Organization unit:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.country" type="text" class="form-control" placeholder="Country:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.email" type="email" class="form-control" placeholder="Email:" required></input>
+										</fieldset>
+										<fieldset class="form-group">
+											<input ng-model="certCtrl.certificateRequest.uid" type="text" class="form-control" placeholder="UID:" required></input>
+										</fieldset>
+										<!--  
+										<fieldset class="form-group">
+								  			<label class="control-label">Certificate authority?<input ng-model="certCtrl.certificateRequest.ca" type="checkbox" class="form-control"></input></label>
+										</fieldset>
+										-->
+										<fieldset class="form-group">
+			                				<input  type="submit" class="btn btn-lg btn-primary btn-block pull-right" value="Generate" />
+			              				</fieldset>
+										<hr></hr>
+										<fieldset><div></div>{{certCtrl.result}}</fieldset><br />
+									</form>
+								</div>
+							</div>
+				  		</div>
+				  		<div class="col-sm-4"></div>
+				  	</div>
+			</div>
+			<div ng-show="tab.isSet(7)">
+				<div class="row">
+			  		<div class="col-sm-2"></div>
+			  		<div class="col-sm-8">
+			  			<h3>Approve certificates</h3>
+				  		<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>CN</th>
+									<th>Surname</th>
+									<th>Given name</th>
+									<th>Country</th>
+									<th>Email</th>
+									<th>UID</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="certReq in certCtrl.certReqs">
+									<td>{{certReq.cn}}</td>
+									<td>{{certReq.surname}}</td>
+									<td>{{certReq.givenName}}</td>
+									<td>{{certReq.country}}</td>
+									<td>{{certReq.email}}</td>
+									<td>{{certReq.uid}}</td>
+									<td><input  type="button" class="btn btn-primary" value="Approve" ng-click="certCtrl.approveCert(certReq)"/></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-2"></div>
+			  	</div>
+			</div>
+			<div ng-show="tab.isSet(2)">
+				<!--To be implemented.-->
+				<div ng-include="'keystore.html'"></div>
+			</div>
+		</div>
+		<div ng-show="tab.isSet(4)">
+			<div ng-include="'revokeCertificateAndGetStatatus.html'"></div>
+		</div>
+		<div ng-show="tab.isSet(5)">
+			<div ng-include="'admin.html'"></div>
+		</div>
+		<div ng-show="tab.isSet(6)">
+			<div ng-include="'status.html'"></div>
+		</div>
+</html>

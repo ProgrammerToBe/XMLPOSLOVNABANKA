@@ -1,0 +1,24 @@
+<div class='row'>
+	<table class="table table-hover">
+		<tr ng-show='racuni.length>0'>
+			<th> Where: </th>
+			<th> When: </th>
+			<th> Give us feedback: </th>
+		</tr>
+		<tr ng-show='racuni.length==0'>
+			<th colspan="3"> You don't have any bill to evaluate. </th>
+		</tr>
+		<tr ng-repeat='racun in racuni'>
+			<td> {{racun.restoran.naziv}} </td>
+			<td> on {{racun.datumOtvaranja | date:'dd.MM.yyyy'}}, at  {{racun.datumOtvaranja | date:'HH:mm'}}</td>
+			<td>
+				<button type="button" class="btn btn-default" ng-click='feedbackRacun(racun)' data-toggle="modal" data-target="#gradesFeedbackModal">
+					Give us feedback!
+				</button> 
+			</td>
+		</tr>
+
+
+</div>
+
+<grades-feedback></grades-feedback>

@@ -1,0 +1,74 @@
+<!-- Modal -->
+<div class="modal fade  bs-example-modal-xs" id="addMealModal" tabindex="-1" role="dialog" aria-labelledby="addMealModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+
+        <h4 class="modal-title" id="addMealModal"> Choose what you want to add to your visit to restaurant. </h4>
+      </div>
+
+
+    <div class="modal-body">
+<!--           
+          <table class="table table-hover">
+              <tr  ng-repeat='posibleRestaurant in restaurants'><td><div class="row">
+                <div class='col-sm-4'> {{posibleRestaurant.naziv}} </div>
+                <div class='col-sm-2 col-sm-offset-6'>
+                  <button type="button" class="btn btn-default" ng-click='chooseRestaurant(posibleRestaurant)'> 
+                    <span class='glyphicon glyphicon-ok'></span> 
+                  </button>
+                </div>
+            </div></td></tr>
+          </table> 
+-->
+
+    
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+        
+
+        <div class="panel panel-default" ng-repeat='kitchen in addModal.restoran.radnoMestoProizvodno'>
+          <div class="panel-heading" role="tab" id="heading{{kitchen.id}}">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#{{kitchen.id}}" aria-expanded="false" aria-controls="{{kitchen.id}}">
+                {{kitchen.menuDescription}}
+              </a>
+            </h4>
+          </div>
+
+          <div id="{{kitchen.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{kitchen.id}}"">
+            <div class="panel-body">
+              
+                            <table class="table table-hover">
+                                <tr  ng-repeat='product in kitchen.proizvodi'><td><div class="row">
+                                  <div class='col-sm-8'> {{product.ime}} </div>
+                                  <div class='col-sm-2 col-sm-offset-2'>
+                                    <button type="button" class="btn btn-default" ng-click='dodajNarudzbu(product)'> 
+                                      <span class='glyphicon glyphicon-ok'></span> 
+                                    </button>
+                                  </div>
+                              </div></td></tr>
+                            </table> 
+
+
+            </div>
+          </div>
+        </div>
+
+      </div> <!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
+
+    </div> <!-- content -->
+
+
+      
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" data-dismiss="modal" id="reservationsAddMealOk">Ok</button>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal" id="registerInfoCancel">Cancel</button> -->
+      </div>
+      
+    </div>
+  </div>
+</div>

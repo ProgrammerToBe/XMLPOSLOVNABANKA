@@ -1,0 +1,19 @@
+.ng-invalid.ng-dirty{
+	border-color : #FA787E;
+}
+
+.ng-valid.ng-dirty{
+	border-color : #78FA89;
+}
+
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}

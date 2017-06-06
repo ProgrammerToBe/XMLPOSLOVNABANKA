@@ -1,0 +1,29 @@
+<div>
+	<div  class="row">
+
+		<div class="col-xs-8 col-xs-offset-2">
+			<table class="table table-bordered table-hover" ng-show='friendsEstablished.hasResult'>
+			  <tr>
+			  	<th>username</th>
+			  	<th>Name</th>
+			  	<th>Lastname</th>
+			  	<th>Remove friend</th>
+			  </tr>
+
+			  <tr ng-repeat='relation in friendsEstablished.relations'>
+			  	<td> {{relation.destination.username}} <span class="badge" ng-hide='relation.visited'>new</span> </td>
+			  	<td> {{relation.destination.name}} </td>
+			  	<td> {{relation.destination.surname}} </td>
+			  	<td> 
+			  		<button type="button" class="btn btn-default button-expanded" ng-click='friendsEstablished.breakUp(relation)'> <span class="glyphicon glyphicon-remove"> </span></button> 
+			  	</td>
+			  </tr>
+			</table>
+			<!-- established: {{friendsEstablished.hasResult}} -->
+			<div ng-hide='friendsEstablished.hasResult'>
+				<h2>	You have no friends </h2>
+			</div>
+		</div>
+	</div>
+
+</div>

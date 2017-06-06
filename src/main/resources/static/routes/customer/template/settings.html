@@ -1,0 +1,67 @@
+
+			<div class='col-xs-offset-1 col-xs-11' id='registerPanel'>
+				<form class="form-horizontal" name="changeForm"  novalidate> <!-- ng-controller="registerController as regCtrl" -->
+
+					<div class="row">
+					<div class="col-sm-offset-4 col-sm-4">
+						<h3> Change profile:  </h3>
+					</div>
+					</div>
+
+
+				  	<div class="form-group">
+				    	<label for="settings_password" class="col-sm-3 control-label">password: </label>
+				    	<div class="col-sm-9">
+				      		<input type="password" class="form-control" id="settings_password" placeholder="password" ng-model="changer.password"  
+				      		value="changer.password" ng-keyup="matching()" required />
+				    	</div>
+				  	</div>
+
+				  	<div class="form-group">
+				    	<label for="settings_password2" class="col-sm-3 control-label">password: </label>
+				    	<div class="col-sm-9">
+				      		<input type="password" class="form-control" id="settings_password2" placeholder="password" ng-model="checker.password" 
+				      		value="checker.password" ng-keyup="matching()" required />
+				    	</div>
+				  	</div>
+
+				  	<div class="form-group">
+				    	<label for="settings_mail" class="col-sm-3 control-label">mail: </label>
+				    	<div class="col-sm-9">
+				      		<input type="email" class="form-control" id="settings_mail" placeholder="mail" ng-model="changer.mail" value="changer.mail" required />
+				    	</div>
+				  	</div>
+
+				  	<div class="form-group">
+				    	<label for="settings_name" class="col-sm-3 control-label">name: </label>
+				    	<div class="col-sm-9">
+				      		<input type="text" class="form-control" id="settings_name" placeholder="name" ng-model="changer.name" value="changer.name" required />
+				    	</div>
+				  	</div>
+
+				  	<div class="form-group">
+				    	<label for="settings_lastname" class="col-sm-3 control-label">surname: </label>
+				    	<div class="col-sm-9">
+				      		<input type="text" class="form-control" id="settings_lastname" placeholder="surname" ng-model="changer.surname" value="changer.surname" required />
+				    	</div>
+				  	</div>
+
+				  <div class="form-group">
+				    <div class="col-sm-offset-10  col-sm-1">
+				      <button type="button" class="btn btn-default" ng-click="reset()">reset</button><!--ng-click="regCtrl.registration()" -->
+				    </div>
+
+				    <div class=" col-sm-1">
+				      <button type="submit" class="btn btn-default" ng-click="applyChanges()" ng-disabled="changeForm.$invalid || !match">apply</button><!--ng-click="regCtrl.registration()" -->
+				    </div>
+				  </div>
+				  	<!-- <autentification-modal></autentification-modal> -->
+				
+				</form>
+
+
+
+
+				
+
+			</div>

@@ -1,0 +1,30 @@
+<div ng-controller="CertificateRevokeAndGetStatus as cRGS">
+	<div ng-init="cRGS.init()">
+	<p>Broj sertifikata: {{revokeRequests.length}}</p>
+	<p>{{cRGS.nesto}}</p>
+	<p>{{nesto1}}</p>
+	<p>Broj registrovanih banki: {{banks.length}}</p>
+	<table class="table table-hover">
+	  <thead>
+		<tr>
+		 
+		  <th>Alias</th>
+		  <th>Comment</th>
+		  
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr ng-repeat="revokeRequest in revokeRequests" id="#"+{{revokeRequest.id}}>
+		 
+		  <td>{{revokeRequest.alias}} </td>
+		  <td>{{revokeRequest.comment}}</td>
+		  <td>
+			<button class="btn btn-default" ng-click="cRGS.acceptRequest(revokeRequest.id)">Accept</button>
+			<button class="btn btn-default" ng-click="cRGS.declineRequest(revokeRequest.id)">Decline</button>
+		  </td>
+		</tr>
+		
+	  </tbody>
+	</table>
+	</div>
+</div>

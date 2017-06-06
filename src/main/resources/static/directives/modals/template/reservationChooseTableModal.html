@@ -1,0 +1,62 @@
+<!-- Modal -->
+<div class="modal fade  bs-example-modal-xs" id="chooseTableModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+
+        <h4 class="modal-title" id="chooseTableTitle"> Choose what you want to eat </h4>
+      </div>
+
+
+      <div class="modal-body">
+          
+          <table class='table table-bordered'> <tbody id='tableBody'>
+
+              <tr ng-repeat='row in space.width'>
+                <td  ng-repeat='col in space.height'
+                    style='background: {{space.map[row][col].region.color}}'>
+                    <!-- data-toggle="tooltip" title="{{space.map[row][col].region.name}}" container='body' -->
+                    <!-- tooltip-placement="top" uib-tooltip="{{space.map[row][col].region.name}}"  tabindex="0" -->
+                      <!-- <div class='button-expanded'   >
+                        
+                      </div> -->
+                      <button type="button" class="btn btn-link button-expanded" tooltip-placement="top" uib-tooltip="{{space.map[row][col].region.name}}" 
+                            ng-click='selectTable(space.map[row][col])' 
+                            ng-disabled='!space.map[row][col].free'
+                            ng-show='space.map[row][col]!=undefined && 
+                            (reservation.sto.element==undefined || reservation.sto.element.positionX!=(row+1) ||  reservation.sto.element.positionY!=(col+1) )'>
+                          <span class='glyphicon glyphicon-star-empty'></span>
+                      </button>
+
+                      <button type="button" class="btn btn-link button-expanded" tooltip-placement="top" uib-tooltip="{{space.map[row][col].region.name}}" 
+                            ng-click='selectTable(space.map[row][col])' 
+                            ng-show='space.map[row][col]!=undefined && reservation.sto.element!=undefined && 
+                            reservation.sto.element.positionX==(row+1) &&  reservation.sto.element.positionY==(col+1)'>
+                          <span class='glyphicon glyphicon-star'></span>
+                      </button>
+
+                      <!-- <span class='glyphicon glyphicon-ok'></span> -->
+                      <button type="button" class="btn btn-link button-expanded" tooltip-placement="top" uib-tooltip="{{space.map[row][col].region.name}}" 
+                          ng-show='space.map[row][col]==undefined' disabled>
+                          &nbsp;
+                      </button>
+
+
+                </td>
+              </tr>
+          </tbody></table>
+      </div> <!-- content -->
+
+
+      
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" data-dismiss="modal" id="reservationsTableOk">Ok</button>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal" id="registerInfoCancel">Cancel</button> -->
+      </div>
+      
+    </div>
+  </div>
+</div>

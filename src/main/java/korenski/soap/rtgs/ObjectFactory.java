@@ -6,7 +6,7 @@
 //
 
 
-package korenski.soap.nalozi_model;
+package korenski.soap.rtgs;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the korenski.soap.nalozi_model package. 
+ * generated in the korenski.soap.rtgs package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,34 +30,50 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: korenski.soap.nalozi_model
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: korenski.soap.rtgs
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link NalogZaPrenos }
+     * Create an instance of {@link RTGS }
      * 
      */
-    public NalogZaPrenos createNalogZaPrenos() {
-        return new NalogZaPrenos();
+    public RTGS createRTGS() {
+        return new RTGS();
     }
 
     /**
-     * Create an instance of {@link NalogResponse }
+     * Create an instance of {@link RTGS.StavkaPrenosa }
      * 
      */
-    public NalogResponse createNalogResponse() {
-        return new NalogResponse();
+    public RTGS.StavkaPrenosa createRTGSStavkaPrenosa() {
+        return new RTGS.StavkaPrenosa();
     }
 
     /**
-     * Create an instance of {@link NalogRequest }
+     * Create an instance of {@link RtgsRequest }
      * 
      */
-    public NalogRequest createNalogRequest() {
-        return new NalogRequest();
+    public RtgsRequest createRtgsRequest() {
+        return new RtgsRequest();
+    }
+
+    /**
+     * Create an instance of {@link RtgsResponse }
+     * 
+     */
+    public RtgsResponse createRtgsResponse() {
+        return new RtgsResponse();
+    }
+
+    /**
+     * Create an instance of {@link TBanka }
+     * 
+     */
+    public TBanka createTBanka() {
+        return new TBanka();
     }
 
     /**
@@ -69,11 +85,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link NalogZaPrenos.PodaciOPlacanju }
+     * Create an instance of {@link RTGS.StavkaPrenosa.PodaciOPlacanju }
      * 
      */
-    public NalogZaPrenos.PodaciOPlacanju createNalogZaPrenosPodaciOPlacanju() {
-        return new NalogZaPrenos.PodaciOPlacanju();
+    public RTGS.StavkaPrenosa.PodaciOPlacanju createRTGSStavkaPrenosaPodaciOPlacanju() {
+        return new RTGS.StavkaPrenosa.PodaciOPlacanju();
     }
 
 }

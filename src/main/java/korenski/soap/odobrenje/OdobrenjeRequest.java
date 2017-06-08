@@ -6,7 +6,7 @@
 //
 
 
-package korenski.soap.izvestaji_model;
+package korenski.soap.odobrenje;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="zahtev" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="zahtev" type="{http://korenski/soap/odobrenje}Poruka"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,21 +38,21 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "zahtev"
 })
-@XmlRootElement(name = "izvestajRequest")
-public class IzvestajRequest {
+@XmlRootElement(name = "odobrenjeRequest")
+public class OdobrenjeRequest {
 
     @XmlElement(required = true)
-    protected String zahtev;
+    protected Poruka zahtev;
 
     /**
      * Gets the value of the zahtev property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Poruka }
      *     
      */
-    public String getZahtev() {
+    public Poruka getZahtev() {
         return zahtev;
     }
 
@@ -61,10 +61,10 @@ public class IzvestajRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Poruka }
      *     
      */
-    public void setZahtev(String value) {
+    public void setZahtev(Poruka value) {
         this.zahtev = value;
     }
 

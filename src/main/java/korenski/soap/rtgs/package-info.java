@@ -5,5 +5,5 @@
 // Generated on: 2017.06.07 at 03:55:02 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://korenski/soap/izvestaji_model", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package korenski.soap.izvestaji_model;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://korenski/soap/rtgs", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package korenski.soap.rtgs;

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rtgsRequest xmlns="http://korenski/soap/rtgs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://korenski/soap/rtgs file:/C:/Users/Korisnik/Documents/XMLPOSLOVNABANKA/src/main/resources/RTGS.xsd">
+    <zahtev Sifra_prometa="MT103">
+        <Banka_poverilac xsi:type="TBanka">
+            <Naziv>Vojvodjanska banka</Naziv>
+            <Swift_kod>VBUBRS22</Swift_kod>
+            <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
+        </Banka_poverilac>
+        <Banka_duznik xsi:type="TBanka">
+            <Naziv>Continental banka</Naziv>
+            <Swift_kod>CONARS22</Swift_kod>
+            <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
+        </Banka_duznik>
+        <Datum>2018-08-27T00:25:03</Datum>
+        <Iznos>25000.32</Iznos>
+        <Stavka_prenosa>
+            <ID_poruke>qweqwe</ID_poruke>
+            <Duznik-nalogodavac>
+                qpwoeiqpwoeiqpwoeiqpwoe
+            </Duznik-nalogodavac>
+            <Primalac-poverilac>
+                QWepoqwpeoqiwpeoqi
+            </Primalac-poverilac>
+            <Svrha_placanja>Prijava ispita</Svrha_placanja>
+            <Podaci_o_placanju>
+                <Finansijski_podaci_duznik>
+                    <Broj_racuna>840-1234567890123-28</Broj_racuna>
+                    <Model>97</Model>
+                    <Poziv_na_broj>123456789012345</Poziv_na_broj>
+                </Finansijski_podaci_duznik>
+                <Finansijski_podaci_poverilac>
+                    <Broj_racuna>123-1234567890123-12</Broj_racuna>
+                    <Model>97</Model>
+                    <Poziv_na_broj>321456789032145</Poziv_na_broj>
+                </Finansijski_podaci_poverilac>
+                <Iznos>1500.23</Iznos>
+                <Datum_valute>2018-08-27T00:25:03</Datum_valute>
+                <Oznaka_valute>DIN</Oznaka_valute>
+                <Datum_naloga>2018-08-27T00:25:03</Datum_naloga>
+            </Podaci_o_placanju>
+        </Stavka_prenosa>
+    </zahtev>
+</rtgsRequest>

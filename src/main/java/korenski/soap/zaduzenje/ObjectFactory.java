@@ -6,7 +6,7 @@
 //
 
 
-package korenski.soap.nalozi_model;
+package korenski.soap.zaduzenje;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the korenski.soap.nalozi_model package. 
+ * generated in the korenski.soap.zaduzenje package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,50 +30,42 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: korenski.soap.nalozi_model
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: korenski.soap.zaduzenje
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link NalogZaPrenos }
+     * Create an instance of {@link ZaduzenjeResponse }
      * 
      */
-    public NalogZaPrenos createNalogZaPrenos() {
-        return new NalogZaPrenos();
+    public ZaduzenjeResponse createZaduzenjeResponse() {
+        return new ZaduzenjeResponse();
     }
 
     /**
-     * Create an instance of {@link NalogResponse }
+     * Create an instance of {@link ZaduzenjeRequest }
      * 
      */
-    public NalogResponse createNalogResponse() {
-        return new NalogResponse();
+    public ZaduzenjeRequest createZaduzenjeRequest() {
+        return new ZaduzenjeRequest();
     }
 
     /**
-     * Create an instance of {@link NalogRequest }
+     * Create an instance of {@link Poruka }
      * 
      */
-    public NalogRequest createNalogRequest() {
-        return new NalogRequest();
+    public Poruka createPoruka() {
+        return new Poruka();
     }
 
     /**
-     * Create an instance of {@link TFinansijskiPodaci }
+     * Create an instance of {@link TBanka }
      * 
      */
-    public TFinansijskiPodaci createTFinansijskiPodaci() {
-        return new TFinansijskiPodaci();
-    }
-
-    /**
-     * Create an instance of {@link NalogZaPrenos.PodaciOPlacanju }
-     * 
-     */
-    public NalogZaPrenos.PodaciOPlacanju createNalogZaPrenosPodaciOPlacanju() {
-        return new NalogZaPrenos.PodaciOPlacanju();
+    public TBanka createTBanka() {
+        return new TBanka();
     }
 
 }

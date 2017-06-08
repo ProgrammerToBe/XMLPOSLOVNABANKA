@@ -6,7 +6,7 @@
 //
 
 
-package korenski.soap.izvestaji_model;
+package korenski.soap.clearing;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="zahtev" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="odgovor" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "zahtev"
+    "odgovor"
 })
-@XmlRootElement(name = "izvestajRequest")
-public class IzvestajRequest {
+@XmlRootElement(name = "clearingResponse")
+public class ClearingResponse {
 
     @XmlElement(required = true)
-    protected String zahtev;
+    protected String odgovor;
 
     /**
-     * Gets the value of the zahtev property.
+     * Gets the value of the odgovor property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getZahtev() {
-        return zahtev;
+    public String getOdgovor() {
+        return odgovor;
     }
 
     /**
-     * Sets the value of the zahtev property.
+     * Sets the value of the odgovor property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setZahtev(String value) {
-        this.zahtev = value;
+    public void setOdgovor(String value) {
+        this.odgovor = value;
     }
 
 }

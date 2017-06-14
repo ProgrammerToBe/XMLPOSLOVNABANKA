@@ -313,3 +313,5 @@ insert into racun values ('4', '123-7184821064803-82', null, '2013-05-07 19:05:0
 insert into zatvaranje_racuna values ('1', '2017-04-30 19:05:00', '123-7184821064803-82', '1');
 
 insert into activity values('1', 'IOP', 'Ipoppop');
+
+insert into banka_port values('1', '8080', 'CBNSRS35');

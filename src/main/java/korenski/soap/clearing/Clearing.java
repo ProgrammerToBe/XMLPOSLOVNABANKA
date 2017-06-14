@@ -6,14 +6,14 @@
 //
 
 
-package korenski.soap.izvestaji_model;
+package korenski.soap.clearing;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -21,19 +21,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for Presek complex type.
+ * <p>Java class for Clearing complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Presek">
+ * &lt;complexType name="Clearing">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Broj_racuna" type="{http://korenski/soap/izvestaji_model}TBroj_racuna"/>
+ *         &lt;element name="Banka_nalogodavac" type="{http://korenski/soap/clearing}TBanka"/>
+ *         &lt;element name="Banka_duznik" type="{http://korenski/soap/clearing}TBanka"/>
  *         &lt;element name="Datum" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="Broj_preseka" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
- *         &lt;element name="Prethodno_stanje">
+ *         &lt;element name="Iznos">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">
  *               &lt;totalDigits value="15"/>
@@ -41,41 +41,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="Broj_promena_u_korist" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger"/>
- *         &lt;element name="Ukupno_u_korist">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">
- *               &lt;minInclusive value="0"/>
- *               &lt;totalDigits value="15"/>
- *               &lt;fractionDigits value="2"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="Broj_promena_na_teret" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger"/>
- *         &lt;element name="Ukupno_na_teret">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">
- *               &lt;minInclusive value="0"/>
- *               &lt;totalDigits value="15"/>
- *               &lt;fractionDigits value="2"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="Novo_stanje">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">
- *               &lt;minInclusive value="0"/>
- *               &lt;totalDigits value="15"/>
- *               &lt;fractionDigits value="2"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="Stavke_preseka">
+ *         &lt;element name="Stavke_prenosa">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="Stavka_preseka" maxOccurs="unbounded">
+ *                   &lt;element name="Stavka_prenosa" maxOccurs="unbounded">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -117,8 +88,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *                                 &lt;complexContent>
  *                                   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                                     &lt;sequence>
- *                                       &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
- *                                       &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
+ *                                       &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
+ *                                       &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
  *                                       &lt;element name="Iznos">
  *                                         &lt;simpleType>
  *                                           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">
@@ -154,6 +125,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *           &lt;/complexType>
  *         &lt;/element>
  *       &lt;/sequence>
+ *       &lt;attribute name="Sifra_prometa" type="{http://www.w3.org/2001/XMLSchema}string" fixed="MT102" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -162,67 +134,75 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Presek", propOrder = {
-    "brojRacuna",
+@XmlType(name = "Clearing", propOrder = {
+    "bankaNalogodavac",
+    "bankaDuznik",
     "datum",
-    "brojPreseka",
-    "prethodnoStanje",
-    "brojPromenaUKorist",
-    "ukupnoUKorist",
-    "brojPromenaNaTeret",
-    "ukupnoNaTeret",
-    "novoStanje",
-    "stavkePreseka"
+    "iznos",
+    "stavkePrenosa"
 })
-public class Presek {
+public class Clearing {
 
-    @XmlElement(name = "Broj_racuna", required = true)
-    protected String brojRacuna;
+    @XmlElement(name = "Banka_nalogodavac", required = true)
+    protected TBanka bankaNalogodavac;
+    @XmlElement(name = "Banka_duznik", required = true)
+    protected TBanka bankaDuznik;
     @XmlElement(name = "Datum", required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar datum;
-    @XmlElement(name = "Broj_preseka", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger brojPreseka;
-    @XmlElement(name = "Prethodno_stanje", required = true)
-    protected BigDecimal prethodnoStanje;
-    @XmlElement(name = "Broj_promena_u_korist", required = true)
-    @XmlSchemaType(name = "nonNegativeInteger")
-    protected BigInteger brojPromenaUKorist;
-    @XmlElement(name = "Ukupno_u_korist", required = true)
-    protected BigDecimal ukupnoUKorist;
-    @XmlElement(name = "Broj_promena_na_teret", required = true)
-    @XmlSchemaType(name = "nonNegativeInteger")
-    protected BigInteger brojPromenaNaTeret;
-    @XmlElement(name = "Ukupno_na_teret", required = true)
-    protected BigDecimal ukupnoNaTeret;
-    @XmlElement(name = "Novo_stanje", required = true)
-    protected BigDecimal novoStanje;
-    @XmlElement(name = "Stavke_preseka", required = true)
-    protected Presek.StavkePreseka stavkePreseka;
+    @XmlElement(name = "Iznos", required = true)
+    protected BigDecimal iznos;
+    @XmlElement(name = "Stavke_prenosa", required = true)
+    protected Clearing.StavkePrenosa stavkePrenosa;
+    @XmlAttribute(name = "Sifra_prometa")
+    protected String sifraPrometa;
 
     /**
-     * Gets the value of the brojRacuna property.
+     * Gets the value of the bankaNalogodavac property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link TBanka }
      *     
      */
-    public String getBrojRacuna() {
-        return brojRacuna;
+    public TBanka getBankaNalogodavac() {
+        return bankaNalogodavac;
     }
 
     /**
-     * Sets the value of the brojRacuna property.
+     * Sets the value of the bankaNalogodavac property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link TBanka }
      *     
      */
-    public void setBrojRacuna(String value) {
-        this.brojRacuna = value;
+    public void setBankaNalogodavac(TBanka value) {
+        this.bankaNalogodavac = value;
+    }
+
+    /**
+     * Gets the value of the bankaDuznik property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TBanka }
+     *     
+     */
+    public TBanka getBankaDuznik() {
+        return bankaDuznik;
+    }
+
+    /**
+     * Sets the value of the bankaDuznik property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TBanka }
+     *     
+     */
+    public void setBankaDuznik(TBanka value) {
+        this.bankaDuznik = value;
     }
 
     /**
@@ -250,195 +230,79 @@ public class Presek {
     }
 
     /**
-     * Gets the value of the brojPreseka property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getBrojPreseka() {
-        return brojPreseka;
-    }
-
-    /**
-     * Sets the value of the brojPreseka property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setBrojPreseka(BigInteger value) {
-        this.brojPreseka = value;
-    }
-
-    /**
-     * Gets the value of the prethodnoStanje property.
+     * Gets the value of the iznos property.
      * 
      * @return
      *     possible object is
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getPrethodnoStanje() {
-        return prethodnoStanje;
+    public BigDecimal getIznos() {
+        return iznos;
     }
 
     /**
-     * Sets the value of the prethodnoStanje property.
+     * Sets the value of the iznos property.
      * 
      * @param value
      *     allowed object is
      *     {@link BigDecimal }
      *     
      */
-    public void setPrethodnoStanje(BigDecimal value) {
-        this.prethodnoStanje = value;
+    public void setIznos(BigDecimal value) {
+        this.iznos = value;
     }
 
     /**
-     * Gets the value of the brojPromenaUKorist property.
+     * Gets the value of the stavkePrenosa property.
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Clearing.StavkePrenosa }
      *     
      */
-    public BigInteger getBrojPromenaUKorist() {
-        return brojPromenaUKorist;
+    public Clearing.StavkePrenosa getStavkePrenosa() {
+        return stavkePrenosa;
     }
 
     /**
-     * Sets the value of the brojPromenaUKorist property.
+     * Sets the value of the stavkePrenosa property.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Clearing.StavkePrenosa }
      *     
      */
-    public void setBrojPromenaUKorist(BigInteger value) {
-        this.brojPromenaUKorist = value;
+    public void setStavkePrenosa(Clearing.StavkePrenosa value) {
+        this.stavkePrenosa = value;
     }
 
     /**
-     * Gets the value of the ukupnoUKorist property.
+     * Gets the value of the sifraPrometa property.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getUkupnoUKorist() {
-        return ukupnoUKorist;
+    public String getSifraPrometa() {
+        if (sifraPrometa == null) {
+            return "MT102";
+        } else {
+            return sifraPrometa;
+        }
     }
 
     /**
-     * Sets the value of the ukupnoUKorist property.
+     * Sets the value of the sifraPrometa property.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setUkupnoUKorist(BigDecimal value) {
-        this.ukupnoUKorist = value;
-    }
-
-    /**
-     * Gets the value of the brojPromenaNaTeret property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getBrojPromenaNaTeret() {
-        return brojPromenaNaTeret;
-    }
-
-    /**
-     * Sets the value of the brojPromenaNaTeret property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setBrojPromenaNaTeret(BigInteger value) {
-        this.brojPromenaNaTeret = value;
-    }
-
-    /**
-     * Gets the value of the ukupnoNaTeret property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public BigDecimal getUkupnoNaTeret() {
-        return ukupnoNaTeret;
-    }
-
-    /**
-     * Sets the value of the ukupnoNaTeret property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public void setUkupnoNaTeret(BigDecimal value) {
-        this.ukupnoNaTeret = value;
-    }
-
-    /**
-     * Gets the value of the novoStanje property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public BigDecimal getNovoStanje() {
-        return novoStanje;
-    }
-
-    /**
-     * Sets the value of the novoStanje property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public void setNovoStanje(BigDecimal value) {
-        this.novoStanje = value;
-    }
-
-    /**
-     * Gets the value of the stavkePreseka property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Presek.StavkePreseka }
-     *     
-     */
-    public Presek.StavkePreseka getStavkePreseka() {
-        return stavkePreseka;
-    }
-
-    /**
-     * Sets the value of the stavkePreseka property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Presek.StavkePreseka }
-     *     
-     */
-    public void setStavkePreseka(Presek.StavkePreseka value) {
-        this.stavkePreseka = value;
+    public void setSifraPrometa(String value) {
+        this.sifraPrometa = value;
     }
 
 
@@ -452,7 +316,7 @@ public class Presek {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="Stavka_preseka" maxOccurs="unbounded">
+     *         &lt;element name="Stavka_prenosa" maxOccurs="unbounded">
      *           &lt;complexType>
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -494,8 +358,8 @@ public class Presek {
      *                       &lt;complexContent>
      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                           &lt;sequence>
-     *                             &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
-     *                             &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
+     *                             &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
+     *                             &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
      *                             &lt;element name="Iznos">
      *                               &lt;simpleType>
      *                                 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">
@@ -535,40 +399,40 @@ public class Presek {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "stavkaPreseka"
+        "stavkaPrenosa"
     })
-    public static class StavkePreseka {
+    public static class StavkePrenosa {
 
-        @XmlElement(name = "Stavka_preseka", required = true)
-        protected List<Presek.StavkePreseka.StavkaPreseka> stavkaPreseka;
+        @XmlElement(name = "Stavka_prenosa", required = true)
+        protected List<Clearing.StavkePrenosa.StavkaPrenosa> stavkaPrenosa;
 
         /**
-         * Gets the value of the stavkaPreseka property.
+         * Gets the value of the stavkaPrenosa property.
          * 
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the stavkaPreseka property.
+         * This is why there is not a <CODE>set</CODE> method for the stavkaPrenosa property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
-         *    getStavkaPreseka().add(newItem);
+         *    getStavkaPrenosa().add(newItem);
          * </pre>
          * 
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@link Presek.StavkePreseka.StavkaPreseka }
+         * {@link Clearing.StavkePrenosa.StavkaPrenosa }
          * 
          * 
          */
-        public List<Presek.StavkePreseka.StavkaPreseka> getStavkaPreseka() {
-            if (stavkaPreseka == null) {
-                stavkaPreseka = new ArrayList<Presek.StavkePreseka.StavkaPreseka>();
+        public List<Clearing.StavkePrenosa.StavkaPrenosa> getStavkaPrenosa() {
+            if (stavkaPrenosa == null) {
+                stavkaPrenosa = new ArrayList<Clearing.StavkePrenosa.StavkaPrenosa>();
             }
-            return this.stavkaPreseka;
+            return this.stavkaPrenosa;
         }
 
 
@@ -619,8 +483,8 @@ public class Presek {
          *             &lt;complexContent>
          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *                 &lt;sequence>
-         *                   &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
-         *                   &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
+         *                   &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
+         *                   &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
          *                   &lt;element name="Iznos">
          *                     &lt;simpleType>
          *                       &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">
@@ -661,7 +525,7 @@ public class Presek {
             "svrhaPlacanja",
             "podaciOPlacanju"
         })
-        public static class StavkaPreseka {
+        public static class StavkaPrenosa {
 
             @XmlElement(name = "ID_poruke", required = true)
             protected String idPoruke;
@@ -672,7 +536,7 @@ public class Presek {
             @XmlElement(name = "Svrha_placanja", required = true)
             protected String svrhaPlacanja;
             @XmlElement(name = "Podaci_o_placanju", required = true)
-            protected Presek.StavkePreseka.StavkaPreseka.PodaciOPlacanju podaciOPlacanju;
+            protected Clearing.StavkePrenosa.StavkaPrenosa.PodaciOPlacanju podaciOPlacanju;
 
             /**
              * Gets the value of the idPoruke property.
@@ -775,10 +639,10 @@ public class Presek {
              * 
              * @return
              *     possible object is
-             *     {@link Presek.StavkePreseka.StavkaPreseka.PodaciOPlacanju }
+             *     {@link Clearing.StavkePrenosa.StavkaPrenosa.PodaciOPlacanju }
              *     
              */
-            public Presek.StavkePreseka.StavkaPreseka.PodaciOPlacanju getPodaciOPlacanju() {
+            public Clearing.StavkePrenosa.StavkaPrenosa.PodaciOPlacanju getPodaciOPlacanju() {
                 return podaciOPlacanju;
             }
 
@@ -787,10 +651,10 @@ public class Presek {
              * 
              * @param value
              *     allowed object is
-             *     {@link Presek.StavkePreseka.StavkaPreseka.PodaciOPlacanju }
+             *     {@link Clearing.StavkePrenosa.StavkaPrenosa.PodaciOPlacanju }
              *     
              */
-            public void setPodaciOPlacanju(Presek.StavkePreseka.StavkaPreseka.PodaciOPlacanju value) {
+            public void setPodaciOPlacanju(Clearing.StavkePrenosa.StavkaPrenosa.PodaciOPlacanju value) {
                 this.podaciOPlacanju = value;
             }
 
@@ -805,8 +669,8 @@ public class Presek {
              *   &lt;complexContent>
              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
              *       &lt;sequence>
-             *         &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
-             *         &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/izvestaji_model}TFinansijski_podaci"/>
+             *         &lt;element name="Finansijski_podaci_duznik" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
+             *         &lt;element name="Finansijski_podaci_poverilac" type="{http://korenski/soap/clearing}TFinansijski_podaci"/>
              *         &lt;element name="Iznos">
              *           &lt;simpleType>
              *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}decimal">

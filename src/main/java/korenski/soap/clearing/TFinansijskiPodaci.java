@@ -6,7 +6,7 @@
 //
 
 
-package korenski.soap.izvestaji_model;
+package korenski.soap.clearing;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,9 +24,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Broj_racuna" type="{http://korenski/soap/izvestaji_model}TBroj_racuna"/>
- *         &lt;element name="Model" type="{http://korenski/soap/izvestaji_model}TModel"/>
- *         &lt;element name="Poziv_na_broj" type="{http://korenski/soap/izvestaji_model}TPoziv_na_broj"/>
+ *         &lt;element name="Broj_racuna" type="{http://korenski/soap/clearing}TBroj_racuna"/>
+ *         &lt;element name="Model" type="{http://korenski/soap/clearing}TModel"/>
+ *         &lt;element name="Poziv_na_broj" type="{http://korenski/soap/clearing}TPoziv_na_broj"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

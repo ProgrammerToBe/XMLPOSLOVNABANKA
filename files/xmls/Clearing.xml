@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clearingRequest xmlns="http://korenski/soap/clearing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://korenski/soap/clearing file:/C:/Users/Korisnik/Documents/XMLPOSLOVNABANKA/src/main/resources/Clearing.xsd">
+    <zahtev Sifra_prometa="MT102">
+        <Banka_nalogodavac xsi:type="TBanka">
+            <Naziv>Vojvodjanska banka</Naziv>
+            <Swift_kod>VBUBRS22</Swift_kod>
+            <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
+        </Banka_nalogodavac>
+        <Banka_duznik xsi:type="TBanka">
+            <Naziv>Continental banka</Naziv>
+            <Swift_kod>CONARS22</Swift_kod>
+            <Obracunski_racun>321-3214567890123-12</Obracunski_racun>
+        </Banka_duznik>
+        <Datum>2018-08-27T00:25:03</Datum>
+        <Iznos>25000.23</Iznos>
+        <Stavke_prenosa>
+            <Stavka_prenosa>
+                <ID_poruke>qweqwe</ID_poruke>
+                <Duznik-nalogodavac>
+                    qpwoeiqpwoeiqpwoeiqpwoe
+                </Duznik-nalogodavac>
+                <Primalac-poverilac>
+                    QWepoqwpeoqiwpeoqi
+                </Primalac-poverilac>
+                <Svrha_placanja>Prijava ispita</Svrha_placanja>
+                <Podaci_o_placanju>
+                    <Finansijski_podaci_duznik>
+                        <Broj_racuna>840-1234567890123-28</Broj_racuna>
+                        <Model>97</Model>
+                        <Poziv_na_broj>123456789012345</Poziv_na_broj>
+                    </Finansijski_podaci_duznik>
+                    <Finansijski_podaci_poverilac>
+                        <Broj_racuna>123-1234567890123-12</Broj_racuna>
+                        <Model>97</Model>
+                        <Poziv_na_broj>321456789032145</Poziv_na_broj>
+                    </Finansijski_podaci_poverilac>
+                    <Iznos>1500.23</Iznos>
+                    <Datum_valute>2018-08-27T00:25:03</Datum_valute>
+                    <Oznaka_valute>DIN</Oznaka_valute>
+                    <Datum_naloga>2018-08-27T00:25:03</Datum_naloga>
+                </Podaci_o_placanju>
+            </Stavka_prenosa>
+            <Stavka_prenosa>
+                <ID_poruke>qweqwe</ID_poruke>
+                <Duznik-nalogodavac>
+                    QWepoiqwpeoqiwpeoiqwpoei
+                </Duznik-nalogodavac>
+                <Primalac-poverilac>
+                    QPwoeiqpwoeiqpwoeiqpwoei
+                </Primalac-poverilac>
+                <Svrha_placanja>Overa semestra</Svrha_placanja>
+                <Podaci_o_placanju>
+                    <Finansijski_podaci_duznik>
+                        <Broj_racuna>840-3214560293841-35</Broj_racuna>
+                        <Model>97</Model>
+                        <Poziv_na_broj>456231456820134</Poziv_na_broj>
+                    </Finansijski_podaci_duznik>
+                    <Finansijski_podaci_poverilac>
+                        <Broj_racuna>123-1234567890123-12</Broj_racuna>
+                        <Model>97</Model>
+                        <Poziv_na_broj>321456789032145</Poziv_na_broj>
+                    </Finansijski_podaci_poverilac>
+                    <Iznos>150000.23</Iznos>
+                    <Datum_valute>2019-01-05T00:25:03</Datum_valute>
+                    <Oznaka_valute>DIN</Oznaka_valute>
+                    <Datum_naloga>2019-01-05T00:25:03</Datum_naloga>
+                </Podaci_o_placanju>
+            </Stavka_prenosa>
+        </Stavke_prenosa>
+    </zahtev>
+</clearingRequest>

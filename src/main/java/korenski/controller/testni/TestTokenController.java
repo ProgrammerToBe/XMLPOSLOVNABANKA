@@ -25,6 +25,7 @@ import korenski.repository.autorizacija.RoleRepository;
 import korenski.repository.autorizacija.UserRepository;
 import korenski.repository.institutions.BankRepository;
 import korenski.repository.klijenti.EmployeeRepository;
+import korenski.soap.PoslovnaKlijent;
 
 @Controller
 public class TestTokenController {
@@ -181,4 +182,41 @@ public class TestTokenController {
 	    System.out.println("USESEN KORISNIK");
 	}
 	
+	@Autowired
+	PoslovnaKlijent poslovnaKlijent;
+	
+	@RequestMapping(
+			value = "/special/posaljiZahtevRtgs",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> PosaljiZahtev(@Context HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("SALJEM zahtev!");
+		
+		String rtgs = poslovnaKlijent.posaljiRtgs();
+		
+		System.out.println("Stigao odgovor!");
+		
+		System.out.println("Odgovor "+rtgs);
+		
+		return new ResponseEntity<String>( "Sve ok", HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value = "/special/posaljiZahtevClearing",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> PosaljiZahtevClearing(@Context HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("SALJEM zahtev!");
+		
+		String clearing = poslovnaKlijent.posaljiClearing();
+		
+		System.out.println("Stigao odgovor!");
+		
+		System.out.println("Odgovor "+clearing);
+		
+		return new ResponseEntity<String>( "Sve ok", HttpStatus.OK);
+	}
+
 }

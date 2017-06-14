@@ -6,27 +6,30 @@
 //
 
 
-package korenski.soap.nalozi_model;
+package korenski.soap.izvestaji_model;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for TFinansijski_podaci complex type.
+ * <p>Java class for Zahtev_za_izvod complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TFinansijski_podaci">
+ * &lt;complexType name="Zahtev_za_izvod">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Broj_racuna" type="{http://korenski/soap/nalozi_model}TBroj_racuna"/>
- *         &lt;element name="Model" type="{http://korenski/soap/nalozi_model}TModel"/>
- *         &lt;element name="Poziv_na_broj" type="{http://korenski/soap/nalozi_model}TPoziv_na_broj"/>
+ *         &lt;element name="Broj_racuna" type="{http://korenski/soap/izvestaji_model}TBroj_racuna"/>
+ *         &lt;element name="Datum" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="Redni_broj_preseka" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,19 +39,21 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TFinansijski_podaci", propOrder = {
+@XmlType(name = "Zahtev_za_izvod", propOrder = {
     "brojRacuna",
-    "model",
-    "pozivNaBroj"
+    "datum",
+    "redniBrojPreseka"
 })
-public class TFinansijskiPodaci {
+public class ZahtevZaIzvod {
 
     @XmlElement(name = "Broj_racuna", required = true)
     protected String brojRacuna;
-    @XmlElement(name = "Model", required = true)
-    protected String model;
-    @XmlElement(name = "Poziv_na_broj", required = true)
-    protected String pozivNaBroj;
+    @XmlElement(name = "Datum", required = true)
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar datum;
+    @XmlElement(name = "Redni_broj_preseka", required = true)
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger redniBrojPreseka;
 
     /**
      * Gets the value of the brojRacuna property.
@@ -75,51 +80,51 @@ public class TFinansijskiPodaci {
     }
 
     /**
-     * Gets the value of the model property.
+     * Gets the value of the datum property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public String getModel() {
-        return model;
+    public XMLGregorianCalendar getDatum() {
+        return datum;
     }
 
     /**
-     * Sets the value of the model property.
+     * Sets the value of the datum property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setModel(String value) {
-        this.model = value;
+    public void setDatum(XMLGregorianCalendar value) {
+        this.datum = value;
     }
 
     /**
-     * Gets the value of the pozivNaBroj property.
+     * Gets the value of the redniBrojPreseka property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link BigInteger }
      *     
      */
-    public String getPozivNaBroj() {
-        return pozivNaBroj;
+    public BigInteger getRedniBrojPreseka() {
+        return redniBrojPreseka;
     }
 
     /**
-     * Sets the value of the pozivNaBroj property.
+     * Sets the value of the redniBrojPreseka property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link BigInteger }
      *     
      */
-    public void setPozivNaBroj(String value) {
-        this.pozivNaBroj = value;
+    public void setRedniBrojPreseka(BigInteger value) {
+        this.redniBrojPreseka = value;
     }
 
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Presek xmlns="http://ftn.uns.ac.rs/izvod"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://ftn.uns.ac.rs/izvod file:/C:/Users/Korisnik/Desktop/JARS%20app/izgleda_da_nema/Izvod.xsd">
+    <Broj_racuna>123-1234567890123-12</Broj_racuna>
+    <Datum>2018-08-27T00:25:03</Datum>
+    <Broj_preseka>1</Broj_preseka>
+    <Prethodno_stanje>1200.23</Prethodno_stanje>
+    <Broj_promena_u_korist>1</Broj_promena_u_korist>
+    <Ukupno_u_korist>600.33</Ukupno_u_korist>
+    <Broj_promena_na_teret>0</Broj_promena_na_teret>
+    <Ukupno_na_teret>0.00</Ukupno_na_teret>
+    <Novo_stanje>1800.56</Novo_stanje>
+    <Stavke_preseka>
+        <Stavka_preseka>
+            <ID_poruke>qweqwe</ID_poruke>
+            <Duznik-nalogodavac>
+                qpwoeiqpwoeiqpwoeiqpwoe
+            </Duznik-nalogodavac>
+            <Primalac-poverilac>
+                QWepoqwpeoqiwpeoqi
+            </Primalac-poverilac>
+            <Svrha_placanja>Prijava ispita</Svrha_placanja>
+            <Podaci_o_placanju>
+                <Finansijski_podaci_duznik>
+                    <Broj_racuna>840-1234567890123-28</Broj_racuna>
+                    <Model>97</Model>
+                    <Poziv_na_broj>123456789012345</Poziv_na_broj>
+                </Finansijski_podaci_duznik>
+                <Finansijski_podaci_poverilac>
+                    <Broj_racuna>123-1234567890123-12</Broj_racuna>
+                    <Model>97</Model>
+                    <Poziv_na_broj>321456789032145</Poziv_na_broj>
+                </Finansijski_podaci_poverilac>
+                <Iznos>600.33</Iznos>
+                <Datum_valute>2018-08-27T00:25:03</Datum_valute>
+                <Oznaka_valute>DIN</Oznaka_valute>
+                <Datum_naloga>2018-08-27T00:25:03</Datum_naloga>
+            </Podaci_o_placanju>
+        </Stavka_preseka>
+    </Stavke_preseka>
+</Presek>

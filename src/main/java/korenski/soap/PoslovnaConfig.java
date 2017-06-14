@@ -37,7 +37,7 @@ public class PoslovnaConfig extends WsConfigurerAdapter {
 
 	@Bean
 	public XsdSchema nalogSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("Nalozi_za_placanje.xsd"));
+		return new SimpleXsdSchema(new ClassPathResource("Nalog_final.xsd"));
 	}
 	
 	
@@ -53,6 +53,6 @@ public class PoslovnaConfig extends WsConfigurerAdapter {
 
 	@Bean
 	public XsdSchema izvestajSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("Izvestaji.xsd"));
+		return new SimpleXsdSchema(new ClassPathResource("Izvestaj_final.xsd"));
 	}
 }

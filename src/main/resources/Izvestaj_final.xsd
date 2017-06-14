@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://korenski/soap/izvestaji_model" elementFormDefault="qualified"
+    targetNamespace="http://korenski/soap/izvestaji_model" xmlns:nalog="http://korenski/soap/izvestaji_model">
+    
+    
+    
+    <xs:element name="izvestajRequest">
+     	<xs:complexType >
+            <xs:sequence>
+                <xs:element name="zahtev" type="tns:Zahtev_za_izvod"/>
+            </xs:sequence>
+        </xs:complexType>
+        
+    </xs:element>
+
+    <xs:element name="izvestajResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="presek" type="tns:Presek"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    
+        <xs:complexType name="Zahtev_za_izvod">
+            <xs:sequence>
+                <xs:element name="Broj_racuna" type="tns:TBroj_racuna"/>
+                <xs:element name="Datum" type="xs:dateTime"/>
+                <xs:element name="Redni_broj_preseka" type="xs:positiveInteger"/>
+            </xs:sequence>
+        </xs:complexType>
+    
+	  <xs:simpleType name="TBroj_racuna">
+	        <xs:restriction base="xs:string">
+	            <xs:pattern value="\d{3}-\d{13}-\d{2}"/>
+	        </xs:restriction>
+	    </xs:simpleType>
+       
+       
+        <xs:complexType name="Presek">
+            <xs:sequence>
+                <xs:element name="Broj_racuna" type="tns:TBroj_racuna"/>
+                <xs:element name="Datum" type="xs:dateTime"/>
+                <xs:element name="Broj_preseka" type="xs:positiveInteger"/>
+                <xs:element name="Prethodno_stanje">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:totalDigits value="15"/>
+                            <xs:fractionDigits value="2"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Broj_promena_u_korist" type="xs:nonNegativeInteger"/>
+                <xs:element name="Ukupno_u_korist">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minInclusive value="0"/>
+                            <xs:totalDigits value="15"/>
+                            <xs:fractionDigits value="2"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Broj_promena_na_teret" type="xs:nonNegativeInteger"/>
+                <xs:element name="Ukupno_na_teret">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minInclusive value="0"/>
+                            <xs:totalDigits value="15"/>
+                            <xs:fractionDigits value="2"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Novo_stanje">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minInclusive value="0"/>
+                            <xs:totalDigits value="15"/>
+                            <xs:fractionDigits value="2"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Stavke_preseka">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Stavka_preseka" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="ID_poruke">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                  <xs:maxLength value="50"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Duznik-nalogodavac">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                  <xs:maxLength value="200"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Primalac-poverilac">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                  <xs:maxLength value="200"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Svrha_placanja">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                  <xs:maxLength value="200"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Podaci_o_placanju">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Finansijski_podaci_duznik"
+                                                  type="tns:TFinansijski_podaci"/>
+                                                  <xs:element name="Finansijski_podaci_poverilac"
+                                                  type="tns:TFinansijski_podaci"/>
+                                                  <xs:element name="Iznos">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:decimal">
+                                                  <xs:fractionDigits value="2"/>
+                                                  <xs:totalDigits value="15"/>
+                                                  <xs:minInclusive value="0"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Datum_valute" type="xs:dateTime"/>
+                                                  <xs:element name="Oznaka_valute">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:length value="3"/>
+                                                  <xs:pattern value="[A-Z]{3}"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Datum_naloga" type="xs:dateTime"
+                                                  />
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    
+       <xs:complexType abstract="false" name="TFinansijski_podaci">
+        <xs:sequence>
+            <xs:element name="Broj_racuna" type="tns:TBroj_racuna"/>
+            <xs:element name="Model" type="tns:TModel"/>
+            <xs:element name="Poziv_na_broj" type="tns:TPoziv_na_broj"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="TPoziv_na_broj">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{15,20}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    
+    <xs:simpleType name="TModel">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>

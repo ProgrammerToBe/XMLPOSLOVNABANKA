@@ -26,6 +26,7 @@ import korenski.repository.autorizacija.UserRepository;
 import korenski.repository.institutions.BankRepository;
 import korenski.repository.klijenti.EmployeeRepository;
 import korenski.soap.PoslovnaKlijent;
+import korenski.soap.clearing.Poruka;
 
 @Controller
 public class TestTokenController {
@@ -191,13 +192,13 @@ public class TestTokenController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> PosaljiZahtev(@Context HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("SALJEM zahtev!");
-		
-		String rtgs = poslovnaKlijent.posaljiRtgs();
-		
-		System.out.println("Stigao odgovor!");
-		
-		System.out.println("Odgovor "+rtgs);
+		System.out.println("SALJEM zahtev RTGS!");
+//		
+//		korenski.soap.rtgs.Poruka rtgs = poslovnaKlijent.posaljiRtgs();
+//		
+//		System.out.println("Stigao odgovor RTGS!");
+//		
+//		System.out.println("Odgovor RTGS "+rtgs.getBanka().getSwiftKod());
 		
 		return new ResponseEntity<String>( "Sve ok", HttpStatus.OK);
 	}
@@ -208,13 +209,14 @@ public class TestTokenController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> PosaljiZahtevClearing(@Context HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("SALJEM zahtev!");
+		System.out.println("SALJEM zahtev Clearing!");
 		
-		String clearing = poslovnaKlijent.posaljiClearing();
+		//Poruka clearing = poslovnaKlijent.posaljiClearing();
 		
-		System.out.println("Stigao odgovor!");
+		System.out.println("Stigao odgovor Clearing!");
 		
-		System.out.println("Odgovor "+clearing);
+		//System.out.println("Odgovor "+clea);
+		//System.out.println("Odgovor Clearing "+clearing.getBanka().getSwiftKod());
 		
 		return new ResponseEntity<String>( "Sve ok", HttpStatus.OK);
 	}

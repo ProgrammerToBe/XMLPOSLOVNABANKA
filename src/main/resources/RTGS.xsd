@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://korenski/soap/rtgs" xmlns="http://korenski/soap/rtgs">
-
-
-    <xs:element name="rtgsRequest">
+	
+	 <xs:element name="rtgsRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="zahtev" type="RTGS"/>
@@ -15,7 +14,7 @@
     <xs:element name="rtgsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="odgovor" type="xs:string"/>
+                <xs:element name="odgovor" type="Poruka"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -66,7 +65,7 @@
         <xs:sequence>
             <xs:element name="Banka_poverilac" type="TBanka"/>
             <xs:element name="Banka_duznik" type="TBanka"/>
-            <xs:element name="Datum" type="xs:dateTime"/>
+            <xs:element name="Datum_valute" type="xs:dateTime"/>
             <xs:element name="Iznos">
                 <xs:simpleType>
                     <xs:restriction base="xs:decimal">
@@ -126,7 +125,6 @@
                                             </xs:restriction>
                                         </xs:simpleType>
                                     </xs:element>
-                                    <xs:element name="Datum_valute" type="xs:dateTime"/>
                                     <xs:element name="Oznaka_valute">
                                         <xs:simpleType>
                                             <xs:restriction base="xs:string">
@@ -145,4 +143,37 @@
         </xs:sequence>
         <xs:attribute fixed="MT103" name="Sifra_prometa" type="xs:string"/>
     </xs:complexType>
+    <xs:complexType name="Poruka">
+            <xs:sequence>
+                <xs:element name="Banka" type="TBanka"/>
+                <xs:element name="Id_poruke_naloga">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="MT102"/>
+                            <xs:enumeration value="MT103"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Datum_valute" type="xs:dateTime"/>
+                <xs:element name="Iznos">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minInclusive value="0"/>
+                            <xs:totalDigits value="15"/>
+                            <xs:fractionDigits value="2"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Sifra_vlute">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:length value="3"/>
+                            <xs:pattern value="[A-Z]{3}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="MT900" name="Id_poruke" type="xs:string" use="required">
+            </xs:attribute>
+    </xs:complexType>	
 </xs:schema>

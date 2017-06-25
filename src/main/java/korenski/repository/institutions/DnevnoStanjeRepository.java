@@ -18,21 +18,24 @@ public interface DnevnoStanjeRepository  extends CrudRepository<DnevnoStanjeRacu
 	public DnevnoStanjeRacuna save(DnevnoStanjeRacuna dnevnoStanje);
 	public DnevnoStanjeRacuna findByDatumAndRacun(Date datum, Racun racun);
 	
-	@Query("select s from DnevnoStanjeRacuna s where s.racun.bank.id = ?1 ")
+	@Query("select s from DnevnoStanjeRacuna s where s.racun.bank.id = ?1 and s.racun.klijent.fizickoLice=?2")
 //			+"and z in (select z1 from ZatvaranjeRacuna z1 where z1.racun.brojRacuna like %?2% )"
 //			+"and z in (select z2 from ZatvaranjeRacuna z2 where z2.racunPrebacenihSredstava like %?3% )"
 //			+"and z in (select z3 from ZatvaranjeRacuna z3 where z3.datumDeaktivacije between ?4 and ?5)")
-	public Set<DnevnoStanjeRacuna> searchByBank(Long id);
+	public Set<DnevnoStanjeRacuna> searchByBank(Long id, boolean fizickoLice);
 	
 	@Query("select s from DnevnoStanjeRacuna s where s.racun.bank.id = ?1 "
 			+"and s in (select s1 from DnevnoStanjeRacuna s1 where s1.racun.brojRacuna like %?2% )"
-			+"and s in (select s2 from DnevnoStanjeRacuna s2 where s2.datum between ?3 and ?4)")
-	public Collection<DnevnoStanjeRacuna> filter(Long id, String racun, Date pocetak, Date kraj);
+			+"and s in (select s2 from DnevnoStanjeRacuna s2 where s2.datum between ?3 and ?4) "
+			+"and s in (select s3 from DnevnoStanjeRacuna s3 where s3.racun.klijent.fizickoLice=?5) "
+			) 
+	public Collection<DnevnoStanjeRacuna> filter(Long id, String racun, Date pocetak, Date kraj, boolean fizickoLice);
 	
 	
 	@Query("select s from DnevnoStanjeRacuna s where s.racun.bank.id = ?1 "
 			+"and s in (select s1 from DnevnoStanjeRacuna s1 where s1.racun.id = ?2 )"
+			+"and s in (select s2 from DnevnoStanjeRacuna s2 where s2.racun.klijent.fizickoLice = ?3 )"
 			)
 	
-	public Collection<DnevnoStanjeRacuna> filterByRacunAndBank(Long id, Long racun);
+	public Collection<DnevnoStanjeRacuna> filterByRacunAndBank(Long id, Long racun, boolean fizickoLice);
 }

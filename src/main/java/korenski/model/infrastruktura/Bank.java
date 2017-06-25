@@ -9,16 +9,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import korenski.model.klijenti.Klijent;
 
 @Entity
+@XmlRootElement()
 public class Bank {
 
 	@Id
 	@GeneratedValue
+	@XmlTransient
 	private Long id;
 	
 	@Column(nullable=false)
@@ -38,7 +42,7 @@ public class Bank {
 	private String swiftCode;
 	
 	@Column(nullable=false)
-	@Size(max = 18)
+	@Size(max = 20)
 	@NotEmpty
 	private String liquidationAcount;
 	
@@ -50,6 +54,7 @@ public class Bank {
 	@OneToMany()
 	private Collection<Klijent> klijenti;
 	
+	@XmlTransient
 	public Collection<Racun> getRacuni() {
 		return racuni;
 	}
@@ -57,7 +62,7 @@ public class Bank {
 	public void setRacuni(Collection<Racun> racuni) {
 		this.racuni = racuni;
 	}
-
+	@XmlTransient
 	public Collection<Klijent> getKlijenti() {
 		return klijenti;
 	}
@@ -79,7 +84,7 @@ public class Bank {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	@XmlTransient
 	public Long getId() {
 		return id;
 	}
@@ -108,7 +113,7 @@ public class Bank {
 	public void setSwiftCode(String swiftCode) {
 		this.swiftCode = swiftCode;
 	}
-
+	@XmlTransient
 	public String getLiquidationAcount() {
 		return liquidationAcount;
 	}

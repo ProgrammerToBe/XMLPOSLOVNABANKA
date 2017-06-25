@@ -13,5 +13,5 @@ public interface BankRepository extends CrudRepository<Bank, Long>{
 	public Bank findOne(Long id);
 	public void delete(Long id);
 	public Set<Bank> findAll();
-	
+	public Bank findByCode(String code);
 }

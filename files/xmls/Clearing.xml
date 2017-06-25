@@ -3,17 +3,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://korenski/soap/clearing file:/C:/Users/Korisnik/Documents/XMLPOSLOVNABANKA/src/main/resources/Clearing.xsd">
     <zahtev Sifra_prometa="MT102">
-        <Banka_nalogodavac xsi:type="TBanka">
-            <Naziv>Vojvodjanska banka</Naziv>
-            <Swift_kod>VBUBRS22</Swift_kod>
-            <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
-        </Banka_nalogodavac>
         <Banka_duznik xsi:type="TBanka">
-            <Naziv>Continental banka</Naziv>
-            <Swift_kod>CONARS22</Swift_kod>
-            <Obracunski_racun>321-3214567890123-12</Obracunski_racun>
+            <Naziv>Vojvodjanska banka</Naziv>
+            <Swift_kod>VBUBRS01</Swift_kod>
+            <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
         </Banka_duznik>
+        <Banka_poverilac xsi:type="TBanka">
+            <Naziv>Continental banka</Naziv>
+            <Swift_kod>CBNSRS01</Swift_kod>
+            <Obracunski_racun>321-3214567890123-12</Obracunski_racun>
+        </Banka_poverilac>
         <Datum>2018-08-27T00:25:03</Datum>
+        <Datum_valute>2019-01-05T00:25:03</Datum_valute>
         <Iznos>25000.23</Iznos>
         <Stavke_prenosa>
             <Stavka_prenosa>
@@ -37,7 +38,6 @@
                         <Poziv_na_broj>321456789032145</Poziv_na_broj>
                     </Finansijski_podaci_poverilac>
                     <Iznos>1500.23</Iznos>
-                    <Datum_valute>2018-08-27T00:25:03</Datum_valute>
                     <Oznaka_valute>DIN</Oznaka_valute>
                     <Datum_naloga>2018-08-27T00:25:03</Datum_naloga>
                 </Podaci_o_placanju>
@@ -63,7 +63,6 @@
                         <Poziv_na_broj>321456789032145</Poziv_na_broj>
                     </Finansijski_podaci_poverilac>
                     <Iznos>150000.23</Iznos>
-                    <Datum_valute>2019-01-05T00:25:03</Datum_valute>
                     <Oznaka_valute>DIN</Oznaka_valute>
                     <Datum_naloga>2019-01-05T00:25:03</Datum_naloga>
                 </Podaci_o_placanju>

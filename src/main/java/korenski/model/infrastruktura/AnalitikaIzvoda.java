@@ -1,6 +1,5 @@
 package korenski.model.infrastruktura;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,11 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@XmlRootElement()
 public class AnalitikaIzvoda {
 	@Id
 	@GeneratedValue
+	@XmlTransient
 	private Long id;
 
 	@Column(nullable = false)
@@ -26,7 +31,7 @@ public class AnalitikaIzvoda {
 	private String primalac;
 	private Date datumNaloga;
 	private Date datumValute;
-	// duzina mora biti osamnjaest
+	
 	private String racunPrvi;
 	private String modelPrvi;
 	private String pozivNaBrojPrvi;
@@ -35,11 +40,16 @@ public class AnalitikaIzvoda {
 	private String pozivNaBrojDrugi;
 	@Column(nullable = false)
 	private double iznos;
+	@Column(nullable = false)
+	private double prethodnoStanje;
+
 	// Sifra valute bi mozda trebala da bude objekat
 	// klase valute
 	private String sifraValute;
+
 	private boolean hitno;
 	@ManyToOne(optional = false)
+	@XmlTransient
 	private DnevnoStanjeRacuna dnevnoStanjeRacuna;
 
 	public AnalitikaIzvoda() {
@@ -47,35 +57,12 @@ public class AnalitikaIzvoda {
 		// TODO Auto-generated constructor stub
 	}
 
-//	public AnalitikaIzvoda(Long id, Date datumAnalitike, String smer, String duznik, String svrhaPlacanja,
-//			String primalac, Date datumNaloga, Date datumValute, String racunPrvi, String modelPrvi,
-//			String pozivNaBrojPrvi, String racunDrugi, String modelDrugi, String pozivNaBrojDrugi, BigDecimal iznos,
-//			String sifraValute, Boolean hitno, DnevnoStanjeRacuna dnevnoStanjeRacuna) {
-//		super();
-//		this.id = id;
-//		this.datumAnalitike = datumAnalitike;
-//		this.smer = smer;
-//		this.duznik = duznik;
-//		this.svrhaPlacanja = svrhaPlacanja;
-//		this.primalac = primalac;
-//		this.datumNaloga = datumNaloga;
-//		this.datumValute = datumValute;
-//		this.racunPrvi = racunPrvi;
-//		this.modelPrvi = modelPrvi;
-//		this.pozivNaBrojPrvi = pozivNaBrojPrvi;
-//		this.racunDrugi = racunDrugi;
-//		this.modelDrugi = modelDrugi;
-//		this.pozivNaBrojDrugi = pozivNaBrojDrugi;
-//		this.iznos = iznos;
-//		this.sifraValute = sifraValute;
-//		this.hitno = hitno;
-//		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
-//	}
+
 
 	public AnalitikaIzvoda(Date datumAnalitike, String smer, String duznik, String svrhaPlacanja, String primalac,
 			Date datumNaloga, Date datumValute, String racunPrvi, String modelPrvi, String pozivNaBrojPrvi,
 			String racunDrugi, String modelDrugi, String pozivNaBrojDrugi, double iznos, String sifraValute,
-			boolean hitno, DnevnoStanjeRacuna dnevnoStanjeRacuna) {
+			boolean hitno, DnevnoStanjeRacuna dnevnoStanjeRacuna, double prethodnoStanje) {
 		super();
 		this.datumAnalitike = datumAnalitike;
 		this.smer = smer;
@@ -94,8 +81,9 @@ public class AnalitikaIzvoda {
 		this.sifraValute = sifraValute;
 		this.hitno = hitno;
 		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
+		this.prethodnoStanje = prethodnoStanje;
 	}
-
+	@XmlTransient
 	public Long getId() {
 		return id;
 	}
@@ -231,7 +219,9 @@ public class AnalitikaIzvoda {
 	public void setHitno(boolean hitno) {
 		this.hitno = hitno;
 	}
-
+	@XmlTransient
+	
+	@JsonIgnoreProperties({"analitikeIzvoda"})
 	public DnevnoStanjeRacuna getDnevnoStanjeRacuna() {
 		return dnevnoStanjeRacuna;
 	}
@@ -240,4 +230,11 @@ public class AnalitikaIzvoda {
 		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
 	}
 
+	public double getPrethodnoStanje() {
+		return prethodnoStanje;
+	}
+
+	public void setPrethodnoStanje(double prethodnoStanje) {
+		this.prethodnoStanje = prethodnoStanje;
+	}
 }

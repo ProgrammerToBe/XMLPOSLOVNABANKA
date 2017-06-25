@@ -56,50 +56,34 @@ public class PoslovnaConfig extends WsConfigurerAdapter {
 		return new SimpleXsdSchema(new ClassPathResource("Izvestaj_final.xsd"));
 	}
 	
-	//ovo moras obrisati pre nego sto vide
-	@Bean(name = "rtgs")
-	public DefaultWsdl11Definition defaultWsdl11DefinitionRtgs(XsdSchema rtgsSchema) {
+	@Bean(name = "odobrenjeClearing")
+	public DefaultWsdl11Definition defaultWsdl11DefinitionOdobrenjeClearing(XsdSchema odobrenjeClearingSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("PoslovnaPort");
 		wsdl11Definition.setLocationUri("/ws_poslovne");
-		wsdl11Definition.setTargetNamespace("http://korenski/soap/rtgs");
-		wsdl11Definition.setSchema(rtgsSchema);
+		wsdl11Definition.setTargetNamespace("http://korenski/soap/odobrenjeclearing");
+		wsdl11Definition.setSchema(odobrenjeClearingSchema);
 		return wsdl11Definition;
 	}
 
 	@Bean
-	public XsdSchema rtgsSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("RTGS.xsd"));
+	public XsdSchema odobrenjeClearingSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("OdobrenjeClearing.xsd"));
 	}
 	
-	@Bean(name = "clearing")
-	public DefaultWsdl11Definition defaultWsdl11DefinitionClearing(XsdSchema clearingSchema) {
+	@Bean(name = "odobrenjeRtgs")
+	public DefaultWsdl11Definition defaultWsdl11DefinitionOdobrenjeRtgs(XsdSchema odobrenjeRtgsSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("PoslovnaPort");
 		wsdl11Definition.setLocationUri("/ws_poslovne");
-		wsdl11Definition.setTargetNamespace("http://korenski/soap/clearing");
-		wsdl11Definition.setSchema(clearingSchema);
+		wsdl11Definition.setTargetNamespace("http://korenski/soap/odobrenjertgs");
+		wsdl11Definition.setSchema(odobrenjeRtgsSchema);
 		return wsdl11Definition;
 	}
 
 	@Bean
-	public XsdSchema clearingSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("Clearing.xsd"));
-	}
-	
-	@Bean(name = "odobrenje")
-	public DefaultWsdl11Definition defaultWsdl11DefinitionOdobrenje(XsdSchema odobrenjeSchema) {
-		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-		wsdl11Definition.setPortTypeName("PoslovnaPort");
-		wsdl11Definition.setLocationUri("/ws_poslovne");
-		wsdl11Definition.setTargetNamespace("http://korenski/soap/odobrenje");
-		wsdl11Definition.setSchema(odobrenjeSchema);
-		return wsdl11Definition;
-	}
-
-	@Bean
-	public XsdSchema odobrenjeSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("Odobrenje.xsd"));
+	public XsdSchema odobrenjeRtgsSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("OdobrenjeRtgs.xsd"));
 	}
 	
 	@Bean(name = "zaduzenje")

@@ -46,7 +46,13 @@ public class DnevnaStanjaController {
 		User u = (User)request.getSession().getAttribute("user");
 		Bank bank = bankRepository.findOne(u.getBank().getId());
 		
-		return new ResponseEntity<Collection<DnevnoStanjeRacuna>>( repository.searchByBank(bank.getId()), HttpStatus.OK);
+		if(u.getRole().getName().equals("MANAGER")){
+			return new ResponseEntity<Collection<DnevnoStanjeRacuna>>( repository.searchByBank(bank.getId(), false), HttpStatus.OK);
+		}else if(u.getRole().getName().equals("COUNTER_OFFICER")){
+			return new ResponseEntity<Collection<DnevnoStanjeRacuna>>( repository.searchByBank(bank.getId(), true), HttpStatus.OK);
+		}
+		
+		return null;
 	}
 	
 	@CustomAnnotation(value = "FILTER_DAILY_STATE")
@@ -99,7 +105,13 @@ public class DnevnaStanjaController {
 			kraj = new java.sql.Date(filter.getKraj().getTime());
 		}
 		
-		return new ResponseEntity<Collection<DnevnoStanjeRacuna>>(repository.filter(bank.getId(), filter.getRacun(), pocetak, kraj), HttpStatus.OK);
+		if(u.getRole().getName().equals("MANAGER")){
+			return new ResponseEntity<Collection<DnevnoStanjeRacuna>>(repository.filter(bank.getId(), filter.getRacun(), pocetak, kraj, false), HttpStatus.OK);
+		}else if(u.getRole().getName().equals("COUNTER_OFFICER")){
+			return new ResponseEntity<Collection<DnevnoStanjeRacuna>>(repository.filter(bank.getId(), filter.getRacun(), pocetak, kraj, true), HttpStatus.OK);
+		}
+		
+		return null;
 	}
 	
 	@CustomAnnotation(value = "FIND_DAILY_STATE_BY_ACCOUNT")
@@ -113,8 +125,16 @@ public class DnevnaStanjaController {
 		Bank bank = bankRepository.findOne(user.getBank().getId());
 		
 		Racun racun = racunRepository.findOne(id);
-		Collection<DnevnoStanjeRacuna> stanja = repository.filterByRacunAndBank(bank.getId(), racun.getId());
+		Collection<DnevnoStanjeRacuna> stanja;
 		
-		return new ResponseEntity<Collection<DnevnoStanjeRacuna>>(stanja, HttpStatus.OK);
+		if(user.getRole().getName().equals("MANAGER")){
+			stanja = repository.filterByRacunAndBank(bank.getId(), racun.getId(), false);
+			return new ResponseEntity<Collection<DnevnoStanjeRacuna>>(stanja, HttpStatus.OK);
+		}else if(user.getRole().getName().equals("COUNTER_OFFICER")){
+			stanja = repository.filterByRacunAndBank(bank.getId(), racun.getId(), true);
+			return new ResponseEntity<Collection<DnevnoStanjeRacuna>>(stanja, HttpStatus.OK);
+		}
+		
+		return null;
 	}
 }

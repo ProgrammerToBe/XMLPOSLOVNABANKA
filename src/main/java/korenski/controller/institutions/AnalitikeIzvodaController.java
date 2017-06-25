@@ -45,7 +45,13 @@ public class AnalitikeIzvodaController {
 		User u = (User) request.getSession().getAttribute("user");
 		Bank bank = bankRepository.findOne(u.getBank().getId());
 
-		return new ResponseEntity<Collection<AnalitikaIzvoda>>(repository.searchByBank(bank.getId()), HttpStatus.OK);
+		if(u.getRole().getName().equals("MANAGER")){
+			return new ResponseEntity<Collection<AnalitikaIzvoda>>(repository.searchByBank(bank.getId(), false), HttpStatus.OK);
+		}else if(u.getRole().getName().equals("COUNTER_OFFICER")){
+			return new ResponseEntity<Collection<AnalitikaIzvoda>>(repository.searchByBank(bank.getId(), true), HttpStatus.OK);
+		}
+		
+		return null;
 	}
 
 	@CustomAnnotation(value = "FILTER_ANALYTICS")
@@ -96,7 +102,7 @@ public class AnalitikeIzvodaController {
 			pocetakAnalitika = new java.sql.Date(d.getTime());
 			System.out.println("Pocetak " + pocetakAnalitika.toString());
 			Date current = new Date();
-			krajAnalitika = new java.sql.Date(current.getTime()+ TimeUnit.DAYS.toMillis(1));
+			krajAnalitika = new java.sql.Date(current.getTime());
 			System.out.println("Kraj " + krajAnalitika.toString());
 		}
 
@@ -109,7 +115,7 @@ public class AnalitikeIzvodaController {
 		if (filter.getPocetakAnalitika() != null && filter.getKrajAnalitika() == null) {
 			pocetakAnalitika = new java.sql.Date(filter.getPocetakAnalitika().getTime());
 			Date current = new Date();
-			krajAnalitika = new java.sql.Date(current.getTime()+ TimeUnit.DAYS.toMillis(1));
+			krajAnalitika = new java.sql.Date(current.getTime());
 		}
 
 		if (filter.getPocetakAnalitika() != null && filter.getKrajAnalitika() != null) {
@@ -126,7 +132,7 @@ public class AnalitikeIzvodaController {
 			pocetakNalog = new java.sql.Date(d.getTime());
 			System.out.println("Pocetak " + pocetakNalog.toString());
 			Date current = new Date();
-			krajNalog = new java.sql.Date(current.getTime()+ TimeUnit.DAYS.toMillis(1));
+			krajNalog = new java.sql.Date(current.getTime());
 			System.out.println("Kraj " + krajNalog.toString());
 		}
 
@@ -139,7 +145,7 @@ public class AnalitikeIzvodaController {
 		if (filter.getPocetakNalog() != null && filter.getKrajNalog() == null) {
 			pocetakNalog = new java.sql.Date(filter.getPocetakNalog().getTime());
 			Date current = new Date();
-			krajNalog = new java.sql.Date(current.getTime()+ TimeUnit.DAYS.toMillis(1));
+			krajNalog = new java.sql.Date(current.getTime());
 		}
 
 		if (filter.getPocetakNalog() != null && filter.getKrajNalog() != null) {
@@ -156,7 +162,7 @@ public class AnalitikeIzvodaController {
 			pocetakValuta = new java.sql.Date(d.getTime());
 			System.out.println("Pocetak " + pocetakValuta.toString());
 			Date current = new Date();
-			krajValuta = new java.sql.Date(current.getTime() + TimeUnit.DAYS.toMillis(1));
+			krajValuta = new java.sql.Date(current.getTime());
 			System.out.println("Kraj " + krajValuta.toString());
 		}
 
@@ -169,7 +175,7 @@ public class AnalitikeIzvodaController {
 		if (filter.getPocetakValuta() != null && filter.getKrajValuta() == null) {
 			pocetakValuta = new java.sql.Date(filter.getPocetakValuta().getTime());
 			Date current = new Date();
-			krajValuta = new java.sql.Date(current.getTime() + TimeUnit.DAYS.toMillis(1));
+			krajValuta = new java.sql.Date(current.getTime());
 		}
 
 		if (filter.getPocetakValuta() != null && filter.getKrajValuta() != null) {
@@ -183,16 +189,31 @@ public class AnalitikeIzvodaController {
 			filter.setHitno(false);
 		}
 		
-		return new ResponseEntity<Collection<AnalitikaIzvoda>>(
-				repository.filter(bank.getId(), filter.getRacunDuznika(),
-						filter.getModelDuznika(), filter.getPozivNaBrojDuznika(),
-						filter.getRacunPoverioca(), filter.getModelPoverioca(),
-						filter.getPozivNaBrojPoverioca(),
-						filter.isHitno(),
-						pocetakAnalitika, krajAnalitika
-						,pocetakNalog, krajNalog, 
-						pocetakValuta, krajValuta)
-				,HttpStatus.OK);
+		if(u.getRole().getName().equals("MANAGER")){
+			return new ResponseEntity<Collection<AnalitikaIzvoda>>(
+					repository.filter(bank.getId(), filter.getRacunDuznika(),
+							filter.getModelDuznika(), filter.getPozivNaBrojDuznika(),
+							filter.getRacunPoverioca(), filter.getModelPoverioca(),
+							filter.getPozivNaBrojPoverioca(),
+							filter.isHitno(),
+							pocetakAnalitika, krajAnalitika
+							,pocetakNalog, krajNalog, 
+							pocetakValuta, krajValuta, false)
+					,HttpStatus.OK);
+		}else if(u.getRole().getName().equals("COUNTER_OFFICER")){
+			return new ResponseEntity<Collection<AnalitikaIzvoda>>(
+					repository.filter(bank.getId(), filter.getRacunDuznika(),
+							filter.getModelDuznika(), filter.getPozivNaBrojDuznika(),
+							filter.getRacunPoverioca(), filter.getModelPoverioca(),
+							filter.getPozivNaBrojPoverioca(),
+							filter.isHitno(),
+							pocetakAnalitika, krajAnalitika
+							,pocetakNalog, krajNalog, 
+							pocetakValuta, krajValuta, true)
+					,HttpStatus.OK);
+		}
+		
+		return null;
 	}
 
 	@CustomAnnotation(value = "FIND_ANALYTICS_BY_DAILY_STATE")
@@ -206,9 +227,15 @@ public class AnalitikeIzvodaController {
 		Bank bank = bankRepository.findOne(user.getBank().getId());
 		
 		DnevnoStanjeRacuna stanjeRacuna = dnevnoStanjeRepository.findOne(id);
-		Collection<AnalitikaIzvoda> izvodi = repository.filterByDnevnoStanjeAndBanka(bank.getId(), stanjeRacuna.getId());
+		Collection<AnalitikaIzvoda> izvodi;
 		
-		return new ResponseEntity<Collection<AnalitikaIzvoda>>(izvodi, HttpStatus.OK);
+		if(user.getRole().getName().equals("MANAGER")){
+			izvodi = repository.filterByDnevnoStanjeAndBanka(bank.getId(), stanjeRacuna.getId(), false);
+		}else if(user.getRole().getName().equals("COUNTER_OFFICER")){
+			izvodi = repository.filterByDnevnoStanjeAndBanka(bank.getId(), stanjeRacuna.getId(), true);
+		}
+		
+		return null;
 	}
 	
 }

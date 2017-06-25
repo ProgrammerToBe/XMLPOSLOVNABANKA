@@ -237,8 +237,8 @@ insert into role_permissions values (4, 84);
 
 
 
-insert into bank values (1, '123', '12345678', 'Prva banka', '12345678');
-insert into bank values (2, '234', '21345678',  'Druga banka', '21345678');
+insert into bank values (1, '123', '111-1234567890123-12', 'Vojvodjanska banka', 'VBUBRS01');
+insert into bank values (2, '234', '111-1234567990123-12',  'Continental banka', 'CBNSRS01');
 insert into bank values (3, '345', '14345678' , 'Treca banka', '14345678');
 insert into bank values (4, '456', '16345678' , 'Cetvrta banka', '16345678');
 insert into bank values (5, '567', '12342678', 'Peta banka', '12342678');
@@ -305,13 +305,13 @@ insert into klijent values ('adresa', 'mail1@kkk.kkk', TRUE, 'Ime1', '4578445121
 insert into klijent values ('adresa', 'mail2@kkk.kkk', TRUE, 'Ime2', '4578545121255', 'Prezime2', '123454788', '13', '1', '1');
 insert into klijent values ('adresa', 'mail3@kkk.kkk', TRUE, 'Ime3', '4518545121255', 'Prezime3', '123452788', '14', '1', '1');
 
-insert into racun values ('1', '123-1726533787929-93', '2017-04-30 19:05:00', '2013-02-15 19:05:00', '0', FALSE, '1', '12');
-insert into racun values ('2', '123-9338670954849-69', NULL, '2013-01-15 19:05:00', '2000', TRUE, '1', '12');
-insert into racun values ('3', '123-8880775775674-13', null, '2013-05-10 19:05:00', '12000', TRUE, '1', '13');
-insert into racun values ('4', '123-7184821064803-82', null, '2013-05-07 19:05:00', '12000', TRUE, '1', '13');
 
-insert into zatvaranje_racuna values ('1', '2017-04-30 19:05:00', '123-7184821064803-82', '1');
+insert into message values ('1', 'MT102');
+insert into message values ('2', 'MT103');
+insert into message values ('3', 'MT202');
+insert into message values ('4', 'MT900');
+insert into message values ('5', 'MT910');
+
+
 
 insert into activity values('1', 'IOP', 'Ipoppop');
-
-insert into banka_port values('1', '8080', 'CBNSRS35');

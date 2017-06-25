@@ -2,8 +2,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://korenski/soap/zaduzenje"
     xmlns="http://korenski/soap/zaduzenje">
-
-    <xs:element name="zaduzenjeRequest">
+	
+	<xs:element name="zaduzenjeRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="zahtev" type="Poruka"/>
@@ -77,5 +77,6 @@
             </xs:sequence>
             <xs:attribute fixed="MT900" name="Id_poruke" type="xs:string" use="required">
             </xs:attribute>
-    </xs:complexType>
+    </xs:complexType>	
+	
 </xs:schema>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://korenski/soap/odobrenjertgs"
+    xmlns="http://korenski/soap/odobrenjertgs">
+    
+    <xs:element name="odobrenjeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="zahtev" type="OdobrenjeRtgs"/>
+            </xs:sequence>
+        </xs:complexType>
+        
+    </xs:element>
+    
+    <xs:element name="odobrenjeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="odgovor" type="xs:string"/>
+				<xs:element name="code" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:simpleType name="TBroj_racuna">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{3}-\d{13}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TBanka">
+        <xs:sequence>
+            <xs:element name="Naziv">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="60"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Swift_kod">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[A-Z]{4}[A-Z]{2}[0-9A-Z]{2}([0-9A-Z]{3})?"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Obracunski_racun" type="TBroj_racuna"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Poruka">
+            <xs:sequence>
+                <xs:element name="Banka" type="TBanka"/>
+                <xs:element name="Id_poruke_naloga">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="MT102"/>
+                            <xs:enumeration value="MT103"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Datum_valute" type="xs:dateTime"/>
+                <xs:element name="Iznos">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minInclusive value="0"/>
+                            <xs:totalDigits value="15"/>
+                            <xs:fractionDigits value="2"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Sifra_vlute">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:length value="3"/>
+                            <xs:pattern value="[A-Z]{3}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="MT910" name="Id_poruke" type="xs:string" use="required">
+            </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="RTGS">
+        <xs:sequence>
+            <xs:element name="Banka_poverilac" type="TBanka"/>
+            <xs:element name="Banka_duznik" type="TBanka"/>
+            <xs:element name="Datum" type="xs:dateTime"/>
+            <xs:element name="Iznos">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal">
+                        <xs:totalDigits value="15"/>
+                        <xs:fractionDigits value="2"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Stavka_prenosa">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ID_poruke">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="50"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="Duznik-nalogodavac">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="200"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="Primalac-poverilac">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="200"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="Svrha_placanja">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="200"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="Podaci_o_placanju">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Finansijski_podaci_duznik"
+                                        type="TFinansijski_podaci"/>
+                                    <xs:element name="Finansijski_podaci_poverilac"
+                                        type="TFinansijski_podaci"/>
+                                    <xs:element name="Iznos">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:decimal">
+                                                <xs:fractionDigits value="2"/>
+                                                <xs:totalDigits value="15"/>
+                                                <xs:minInclusive value="0"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="Datum_valute" type="xs:dateTime"/>
+                                    <xs:element name="Oznaka_valute">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:length value="3"/>
+                                                <xs:pattern value="[A-Z]{3}"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="Datum_naloga" type="xs:dateTime"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="MT103" name="Sifra_prometa" type="xs:string"/>
+    </xs:complexType>
+    <xs:simpleType name="TModel">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TPoziv_na_broj">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{15,20}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType abstract="false" name="TFinansijski_podaci">
+        <xs:sequence>
+            <xs:element name="Broj_racuna" type="TBroj_racuna"/>
+            <xs:element name="Model" type="TModel"/>
+            <xs:element name="Poziv_na_broj" type="TPoziv_na_broj"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OdobrenjeRtgs">
+    	<xs:sequence>
+    		<xs:element name="RtgsElement" type="RTGS"/>
+    		<xs:element name="PorukaElement" type="Poruka"/>
+    	</xs:sequence>
+    </xs:complexType>
+</xs:schema>

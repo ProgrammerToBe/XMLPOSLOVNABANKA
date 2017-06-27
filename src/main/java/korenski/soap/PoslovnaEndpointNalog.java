@@ -2,7 +2,7 @@ package korenski.soap;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.jws.HandlerChain;
 
@@ -20,9 +20,7 @@ import korenski.repository.institutions.DnevnoStanjeRepository;
 import korenski.repository.institutions.RacunRepository;
 import korenski.repository.soap.IzvodRepository;
 import korenski.repository.soap.NalogRepository;
-import korenski.repository.soap.OdobrenjeClearingOdgovorRepository;
 import korenski.repository.soap.OdobrenjeClearingRepository;
-import korenski.repository.soap.OdobrenjeRtgsOdgovorRepository;
 import korenski.repository.soap.OdobrenjeRtgsRepository;
 import korenski.repository.soap.PresekRepository;
 import korenski.service.infrastruktura.BusinessLogicService;
@@ -216,6 +214,15 @@ public class PoslovnaEndpointNalog {
 		
 		odobrenjeClearingRepository.save(request.getZahtev());
 		
+		
+		List<korenski.soap.odobrenjeclearing.Clearing.StavkePrenosa.StavkaPrenosa> stavke = request.getZahtev().getClearingElement().getStavkePrenosa().getStavkaPrenosa();
+		
+		Racun racunPoverioca = null;
+		for(korenski.soap.odobrenjeclearing.Clearing.StavkePrenosa.StavkaPrenosa s : stavke){
+			racunPoverioca = racunRepository.findByBrojRacuna(s.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getBrojRacuna());
+			businessLogicService.uplataClearing(s, racunPoverioca);
+		}
+		
 		return response;
 	}
 	
@@ -229,6 +236,13 @@ public class PoslovnaEndpointNalog {
 		response.setOdgovor("Primljen zahtev za odobrenje RTGS " + request.getZahtev().getRtgsElement().getIznos());
 		
 		odobrenjeRtgsRepository.save(request.getZahtev());
+		
+		
+		korenski.soap.odobrenjertgs.RTGS.StavkaPrenosa stavka = request.getZahtev().getRtgsElement().getStavkaPrenosa();
+		
+		Racun racunPoverioca = racunRepository.findByBrojRacuna(stavka.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getBrojRacuna());
+		
+		businessLogicService.uplataRTGS(stavka, racunPoverioca);
 		
 		return response;
 	}

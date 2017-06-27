@@ -1,5 +1,6 @@
 package korenski.service.infrastruktura;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -549,75 +550,145 @@ public class BusinessLogicService {
 		return true;
 	}
 	
-	public boolean uplata(NalogZaPrenos  nalog, Racun racunPoverioca){
+	public boolean uplataClearing(korenski.soap.odobrenjeclearing.Clearing.StavkePrenosa.StavkaPrenosa stavka, Racun racunPoverioca){
 	
-//			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-//
-//			Date today = new Date();
-//			Date todayWithZeroTime = null;
-//			try {
-//				todayWithZeroTime = formatter.parse(formatter.format(today));
-//			} catch (ParseException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//				e1.printStackTrace();
-//				return false;
-//			}
-//			
-//			DnevnoStanjeRacuna dnevnoStanjePoverioca = dnevnoStanjeRepository.findByDatumAndRacun(todayWithZeroTime,
-//					racunPoverioca);
-//
-//			
-//
-//			if (dnevnoStanjePoverioca == null) {
-//				dnevnoStanjePoverioca = new DnevnoStanjeRacuna(new Date(), racunPoverioca.getStanje(), 0, 0,
-//						racunPoverioca.getStanje(), racunPoverioca);
-//				racunPoverioca.getDnevnaStanjaRacuna().add(dnevnoStanjePoverioca);
-//				try {
-//					dnevnoStanjeRepository.save(dnevnoStanjePoverioca);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//					return false;
-//				}
-//			}
-//			boolean hitno;
-//			if (nalog.getHitno().equals("Da")) {
-//				hitno = true;
-//			} else {
-//				hitno = false;
-//			}
-//
-//			AnalitikaIzvoda analitikaPoverioca = new AnalitikaIzvoda(new Date(new Date().getTime()), "K",
-//					nalog.getPodaciODuzniku().getAdresa(), nalog.getSvrhaPlacanja(),
-//					nalog.getPodaciOPoveriocu().getAdresa(), nalog.getPodaciOPlacanju().getDatumValute(),
-//					nalog.getPodaciOPlacanju().getDatumValute(),null,
-//					null,
-//					null,
-//					racunPoverioca.getBrojRacuna(), nalog.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getModel(),
-//					nalog.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getPozivNaBroj(),
-//					nalog.getPodaciOPlacanju().getIznos(), nalog.getPodaciOPlacanju().getValuta(), hitno,
-//					dnevnoStanjePoverioca);
-//			
-//			try {
-//				
-//				racunPoverioca.setStanje(racunPoverioca.getStanje()+nalog.getPodaciOPlacanju().getIznos());
-//				
-//				racunRepository.save(racunPoverioca);
-//				
-//				analitikaPoverioca=analitikaIzvodaRepository.save(analitikaPoverioca);
-//				dnevnoStanjePoverioca.setNovoStanje(dnevnoStanjePoverioca.getNovoStanje() + analitikaPoverioca.getIznos());
-//				dnevnoStanjePoverioca
-//						.setPrometUKorist(dnevnoStanjePoverioca.getPrometUKorist() + analitikaPoverioca.getIznos());
-//				dnevnoStanjePoverioca.getAnalitike().add(analitikaPoverioca);
-//				dnevnoStanjeRepository.save(dnevnoStanjePoverioca);
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//				return false;
-//			}
-//		
-//			
+			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+			Date today = new Date();
+			Date todayWithZeroTime = null;
+			try {
+				todayWithZeroTime = formatter.parse(formatter.format(today));
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				e1.printStackTrace();
+				return false;
+			}
+			
+			DnevnoStanjeRacuna dnevnoStanjePoverioca = dnevnoStanjeRepository.findByDatumAndRacun(todayWithZeroTime,
+					racunPoverioca);
+
+			
+
+			if (dnevnoStanjePoverioca == null) {
+				dnevnoStanjePoverioca = new DnevnoStanjeRacuna(todayWithZeroTime, racunPoverioca.getStanje(), 0, 0,
+						racunPoverioca.getStanje(), racunPoverioca);
+				racunPoverioca.getDnevnaStanjaRacuna().add(dnevnoStanjePoverioca);
+				try {
+					dnevnoStanjeRepository.save(dnevnoStanjePoverioca);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return false;
+				}
+			}
+			boolean hitno;
+			
+			hitno = false;
+			
+
+			AnalitikaIzvoda analitikaPoverioca = new AnalitikaIzvoda(new Date(new Date().getTime()), "K",
+					stavka.getDuznikNalogodavac(), stavka.getSvrhaPlacanja(),
+					stavka.getPrimalacPoverilac(), stavka.getPodaciOPlacanju().getDatumValute(),
+					stavka.getPodaciOPlacanju().getDatumValute(),
+					stavka.getPodaciOPlacanju().getFinansijskiPodaciDuznik().getBrojRacuna(),
+					stavka.getPodaciOPlacanju().getFinansijskiPodaciDuznik().getModel(),
+					stavka.getPodaciOPlacanju().getFinansijskiPodaciDuznik().getPozivNaBroj(),
+					racunPoverioca.getBrojRacuna(),
+					stavka.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getModel(),
+					stavka.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getPozivNaBroj(),
+					stavka.getPodaciOPlacanju().getIznos().doubleValue(), stavka.getPodaciOPlacanju().getOznakaValute() , hitno,
+					dnevnoStanjePoverioca, racunPoverioca.getStanje());
+			
+			try {
+				
+				racunPoverioca.setStanje(racunPoverioca.getStanje()+stavka.getPodaciOPlacanju().getIznos().doubleValue());
+				
+				racunRepository.save(racunPoverioca);
+				
+				analitikaPoverioca=analitikaIzvodaRepository.save(analitikaPoverioca);
+				dnevnoStanjePoverioca.setNovoStanje(dnevnoStanjePoverioca.getNovoStanje() + analitikaPoverioca.getIznos());
+				dnevnoStanjePoverioca
+						.setPrometUKorist(dnevnoStanjePoverioca.getPrometUKorist() + analitikaPoverioca.getIznos());
+				dnevnoStanjePoverioca.getAnalitike().add(analitikaPoverioca);
+				dnevnoStanjeRepository.save(dnevnoStanjePoverioca);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+		
+			
 			return true;
 	}
+	
+	public boolean uplataRTGS(korenski.soap.odobrenjertgs.RTGS.StavkaPrenosa stavka, Racun racunPoverioca){
+		
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		Date today = new Date();
+		Date todayWithZeroTime = null;
+		try {
+			todayWithZeroTime = formatter.parse(formatter.format(today));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			e1.printStackTrace();
+			return false;
+		}
+		
+		DnevnoStanjeRacuna dnevnoStanjePoverioca = dnevnoStanjeRepository.findByDatumAndRacun(todayWithZeroTime,
+				racunPoverioca);
+
+		
+
+		if (dnevnoStanjePoverioca == null) {
+			dnevnoStanjePoverioca = new DnevnoStanjeRacuna(todayWithZeroTime, racunPoverioca.getStanje(), 0, 0,
+					racunPoverioca.getStanje(), racunPoverioca);
+			racunPoverioca.getDnevnaStanjaRacuna().add(dnevnoStanjePoverioca);
+			try {
+				dnevnoStanjeRepository.save(dnevnoStanjePoverioca);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		boolean hitno;
+		
+		hitno = true;
+		
+
+		AnalitikaIzvoda analitikaPoverioca = new AnalitikaIzvoda(new Date(new Date().getTime()), "K",
+				stavka.getDuznikNalogodavac(), stavka.getSvrhaPlacanja(),
+				stavka.getPrimalacPoverilac(), stavka.getPodaciOPlacanju().getDatumValute(),
+				stavka.getPodaciOPlacanju().getDatumValute(),
+				stavka.getPodaciOPlacanju().getFinansijskiPodaciDuznik().getBrojRacuna(),
+				stavka.getPodaciOPlacanju().getFinansijskiPodaciDuznik().getModel(),
+				stavka.getPodaciOPlacanju().getFinansijskiPodaciDuznik().getPozivNaBroj(),
+				racunPoverioca.getBrojRacuna(),
+				stavka.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getModel(),
+				stavka.getPodaciOPlacanju().getFinansijskiPodaciPoverilac().getPozivNaBroj(),
+				stavka.getPodaciOPlacanju().getIznos().doubleValue(), stavka.getPodaciOPlacanju().getOznakaValute() , hitno,
+				dnevnoStanjePoverioca, racunPoverioca.getStanje());
+		
+		try {
+			
+			racunPoverioca.setStanje(racunPoverioca.getStanje()+stavka.getPodaciOPlacanju().getIznos().doubleValue());
+			
+			racunRepository.save(racunPoverioca);
+			
+			analitikaPoverioca=analitikaIzvodaRepository.save(analitikaPoverioca);
+			dnevnoStanjePoverioca.setNovoStanje(dnevnoStanjePoverioca.getNovoStanje() + analitikaPoverioca.getIznos());
+			dnevnoStanjePoverioca
+					.setPrometUKorist(dnevnoStanjePoverioca.getPrometUKorist() + analitikaPoverioca.getIznos());
+			dnevnoStanjePoverioca.getAnalitike().add(analitikaPoverioca);
+			dnevnoStanjeRepository.save(dnevnoStanjePoverioca);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	
+		
+		return true;
+}
 	
 	public boolean isplata(NalogZaPrenos nalog, Racun racunDuznika){
 		
